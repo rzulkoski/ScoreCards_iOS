@@ -77,9 +77,9 @@
 		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
 			isa = PBXGroup;
 			children = (
+				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
 				947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */,
-				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */,
 				947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
