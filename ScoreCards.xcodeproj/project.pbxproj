@@ -1,0 +1,287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		947A0E8915EA734C003AEF56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8815EA734C003AEF56 /* UIKit.framework */; };
+		947A0E8B15EA734C003AEF56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8A15EA734C003AEF56 /* Foundation.framework */; };
+		947A0E8D15EA734C003AEF56 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8C15EA734C003AEF56 /* CoreGraphics.framework */; };
+		947A0E9315EA734C003AEF56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 947A0E9115EA734C003AEF56 /* InfoPlist.strings */; };
+		947A0E9515EA734C003AEF56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9415EA734C003AEF56 /* main.m */; };
+		947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */; };
+		947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */; };
+		947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		947A0E8415EA734C003AEF56 /* ScoreCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		947A0E8815EA734C003AEF56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		947A0E8A15EA734C003AEF56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		947A0E8C15EA734C003AEF56 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		947A0E9015EA734C003AEF56 /* ScoreCards-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ScoreCards-Info.plist"; sourceTree = "<group>"; };
+		947A0E9215EA734C003AEF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		947A0E9415EA734C003AEF56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		947A0E9615EA734C003AEF56 /* ScoreCards-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ScoreCards-Prefix.pch"; sourceTree = "<group>"; };
+		947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardsAppDelegate.h; sourceTree = "<group>"; };
+		947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsAppDelegate.m; sourceTree = "<group>"; };
+		947A0E9B15EA734C003AEF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardsViewController.h; sourceTree = "<group>"; };
+		947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		947A0E8115EA734C003AEF56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947A0E8915EA734C003AEF56 /* UIKit.framework in Frameworks */,
+				947A0E8B15EA734C003AEF56 /* Foundation.framework in Frameworks */,
+				947A0E8D15EA734C003AEF56 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		947A0E7915EA734C003AEF56 = {
+			isa = PBXGroup;
+			children = (
+				947A0E8E15EA734C003AEF56 /* ScoreCards */,
+				947A0E8715EA734C003AEF56 /* Frameworks */,
+				947A0E8515EA734C003AEF56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		947A0E8515EA734C003AEF56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				947A0E8415EA734C003AEF56 /* ScoreCards.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		947A0E8715EA734C003AEF56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				947A0E8815EA734C003AEF56 /* UIKit.framework */,
+				947A0E8A15EA734C003AEF56 /* Foundation.framework */,
+				947A0E8C15EA734C003AEF56 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
+			isa = PBXGroup;
+			children = (
+				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
+				947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */,
+				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
+				947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */,
+				947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */,
+				947A0E8F15EA734C003AEF56 /* Supporting Files */,
+			);
+			path = ScoreCards;
+			sourceTree = "<group>";
+		};
+		947A0E8F15EA734C003AEF56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				947A0E9015EA734C003AEF56 /* ScoreCards-Info.plist */,
+				947A0E9115EA734C003AEF56 /* InfoPlist.strings */,
+				947A0E9415EA734C003AEF56 /* main.m */,
+				947A0E9615EA734C003AEF56 /* ScoreCards-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		947A0E8315EA734C003AEF56 /* ScoreCards */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 947A0EA215EA734C003AEF56 /* Build configuration list for PBXNativeTarget "ScoreCards" */;
+			buildPhases = (
+				947A0E8015EA734C003AEF56 /* Sources */,
+				947A0E8115EA734C003AEF56 /* Frameworks */,
+				947A0E8215EA734C003AEF56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScoreCards;
+			productName = ScoreCards;
+			productReference = 947A0E8415EA734C003AEF56 /* ScoreCards.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		947A0E7B15EA734C003AEF56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ScoreCards;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = RZGamer;
+			};
+			buildConfigurationList = 947A0E7E15EA734C003AEF56 /* Build configuration list for PBXProject "ScoreCards" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 947A0E7915EA734C003AEF56;
+			productRefGroup = 947A0E8515EA734C003AEF56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				947A0E8315EA734C003AEF56 /* ScoreCards */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		947A0E8215EA734C003AEF56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947A0E9315EA734C003AEF56 /* InfoPlist.strings in Resources */,
+				947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		947A0E8015EA734C003AEF56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				947A0E9515EA734C003AEF56 /* main.m in Sources */,
+				947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */,
+				947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		947A0E9115EA734C003AEF56 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947A0E9215EA734C003AEF56 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				947A0E9B15EA734C003AEF56 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		947A0EA015EA734C003AEF56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		947A0EA115EA734C003AEF56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		947A0EA315EA734C003AEF56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
+				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		947A0EA415EA734C003AEF56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
+				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		947A0E7E15EA734C003AEF56 /* Build configuration list for PBXProject "ScoreCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947A0EA015EA734C003AEF56 /* Debug */,
+				947A0EA115EA734C003AEF56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		947A0EA215EA734C003AEF56 /* Build configuration list for PBXNativeTarget "ScoreCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				947A0EA315EA734C003AEF56 /* Debug */,
+				947A0EA415EA734C003AEF56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 947A0E7B15EA734C003AEF56 /* Project object */;
+}
