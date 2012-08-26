@@ -15,6 +15,7 @@
 		947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */; };
 		947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */; };
 		947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */; };
+		94E0382F15EA863A003C1CC8 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0382E15EA863A003C1CC8 /* SetupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		947A0E9B15EA734C003AEF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardsViewController.h; sourceTree = "<group>"; };
 		947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
+		94E0382D15EA863A003C1CC8 /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		94E0382E15EA863A003C1CC8 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +80,13 @@
 		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
 			isa = PBXGroup;
 			children = (
-				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
 				947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */,
+				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */,
 				947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */,
+				94E0382D15EA863A003C1CC8 /* SetupViewController.h */,
+				94E0382E15EA863A003C1CC8 /* SetupViewController.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -165,6 +170,7 @@
 				947A0E9515EA734C003AEF56 /* main.m in Sources */,
 				947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */,
 				947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */,
+				94E0382F15EA863A003C1CC8 /* SetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +286,7 @@
 				947A0EA415EA734C003AEF56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
