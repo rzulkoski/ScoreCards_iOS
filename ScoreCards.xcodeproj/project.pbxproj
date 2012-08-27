@@ -15,6 +15,8 @@
 		947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */; };
 		947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */; };
 		947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */; };
+		94BD50C615EAE5D50089835C /* PitchHandsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BD50C515EAE5D50089835C /* PitchHandsTableView.m */; };
+		94C5B76515EAC19B002F518B /* PitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C5B76415EAC19B002F518B /* PitchViewController.m */; };
 		94E0382F15EA863A003C1CC8 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E0382E15EA863A003C1CC8 /* SetupViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,10 @@
 		947A0E9B15EA734C003AEF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		947A0E9D15EA734C003AEF56 /* ScoreCardsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardsViewController.h; sourceTree = "<group>"; };
 		947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
+		94BD50C415EAE5D50089835C /* PitchHandsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchHandsTableView.h; path = ../PitchHandsTableView.h; sourceTree = "<group>"; };
+		94BD50C515EAE5D50089835C /* PitchHandsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchHandsTableView.m; path = ../PitchHandsTableView.m; sourceTree = "<group>"; };
+		94C5B76315EAC19B002F518B /* PitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchViewController.h; sourceTree = "<group>"; };
+		94C5B76415EAC19B002F518B /* PitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PitchViewController.m; sourceTree = "<group>"; };
 		94E0382D15EA863A003C1CC8 /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
 		94E0382E15EA863A003C1CC8 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +93,10 @@
 				947A0E9E15EA734C003AEF56 /* ScoreCardsViewController.m */,
 				94E0382D15EA863A003C1CC8 /* SetupViewController.h */,
 				94E0382E15EA863A003C1CC8 /* SetupViewController.m */,
+				94C5B76315EAC19B002F518B /* PitchViewController.h */,
+				94C5B76415EAC19B002F518B /* PitchViewController.m */,
+				94BD50C415EAE5D50089835C /* PitchHandsTableView.h */,
+				94BD50C515EAE5D50089835C /* PitchHandsTableView.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -171,6 +181,8 @@
 				947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */,
 				947A0E9F15EA734C003AEF56 /* ScoreCardsViewController.m in Sources */,
 				94E0382F15EA863A003C1CC8 /* SetupViewController.m in Sources */,
+				94C5B76515EAC19B002F518B /* PitchViewController.m in Sources */,
+				94BD50C615EAE5D50089835C /* PitchHandsTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
