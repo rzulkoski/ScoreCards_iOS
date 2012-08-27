@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PitchViewController : UIViewController
+@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
 
 @end

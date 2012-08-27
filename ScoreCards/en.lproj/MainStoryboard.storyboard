@@ -152,20 +152,6 @@
                                     <action selector="pointTargetSelected:" destination="NIv-hR-2w7" eventType="valueChanged" id="JEy-x4-AU4"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="nRY-jF-P4O">
-                                <rect key="frame" x="139" y="71" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Xdx-1W-fTM">
-                                <rect key="frame" x="216" y="71" width="73" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="13" id="958-ls-XIF">
                                 <rect key="frame" x="79" y="374" width="223" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -218,30 +204,60 @@
                                     <action selector="biddingTeamSelected:" destination="NIv-hR-2w7" eventType="valueChanged" id="h8m-qF-Lfg"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="udI-SS-LEB">
-                                <rect key="frame" x="47" y="71" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kWn-cv-CfR">
-                                <rect key="frame" x="21" y="100" width="280" height="158"/>
+                                <rect key="frame" x="21" y="71" width="280" height="187"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="pitch2TeamTableCell" id="L1O-5A-h7t" customClass="PitchHandTableViewCell">
+                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="udI-SS-LEB">
+                                                    <rect key="frame" x="26" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="nRY-jF-P4O">
+                                                    <rect key="frame" x="119" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No bid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Xdx-1W-fTM">
+                                                    <rect key="frame" x="192" y="11" width="73" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="bid" destination="Xdx-1W-fTM" id="xy1-wQ-ueT"/>
+                                            <outlet property="team1Score" destination="udI-SS-LEB" id="kxg-oM-Yjk"/>
+                                            <outlet property="team2Score" destination="nRY-jF-P4O" id="CUd-T2-rXu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Pitch" id="zQ9-MW-3id"/>
                     <connections>
-                        <outlet property="bid" destination="Xdx-1W-fTM" id="yut-FK-uWf"/>
                         <outlet property="biddingTeam" destination="IVk-at-SNC" id="4en-uX-5Tv"/>
+                        <outlet property="pitchHandsTableView" destination="kWn-cv-CfR" id="HW5-Ku-4iA"/>
                         <outlet property="pointSlider" destination="958-ls-XIF" id="1aD-d4-gTC"/>
                         <outlet property="pointTargetControl" destination="1Mr-qO-O8v" id="qN1-NG-2Lo"/>
                         <outlet property="suitControl" destination="kcp-qd-Sbl" id="68z-q1-q5h"/>
-                        <outlet property="team1Score" destination="udI-SS-LEB" id="1GZ-ie-lPl"/>
-                        <outlet property="team2Score" destination="nRY-jF-P4O" id="wvg-2C-3Sg"/>
                     </connections>
                 </viewController>
             </objects>
@@ -267,6 +283,14 @@
         </scene>
     </scenes>
     <classes>
+        <class className="PitchHandTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchHandTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bid" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team1Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team2Score" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="PitchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
@@ -274,13 +298,11 @@
                 <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="pointsSelected:" candidateClass="UISlider"/>
                 <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="bid" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="biddingTeam" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="pitchHandsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="pointSlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="pointTargetControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="suitControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="team1Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="team2Score" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="ScoreCardsViewController" superclassName="UIViewController">
