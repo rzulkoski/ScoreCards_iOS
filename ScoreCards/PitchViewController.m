@@ -12,11 +12,15 @@
 @interface PitchViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pointTargetControl;
 @property (strong, nonatomic) NSMutableArray *team1Scores;
+@property (strong, nonatomic) NSMutableArray *team1ScoreChanges;
 @property (strong, nonatomic) NSMutableArray *team2Scores;
+@property (strong, nonatomic) NSMutableArray *team2ScoreChanges;
 @property (strong, nonatomic) NSMutableArray *bids;
-@property (weak, nonatomic) IBOutlet UISlider *pointSlider;
+@property (strong, nonatomic) IBOutlet UIStepper *pointStepper;
+@property (strong, nonatomic) IBOutlet UILabel *pointStepperDisplay;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *suitControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *biddingTeam;
+@property (strong, nonatomic) IBOutlet UIButton *nextHandButton;
 @property (nonatomic) int currentBid;
  
 
@@ -26,12 +30,16 @@
 
 @synthesize pitchHandsTableView;
 @synthesize team1Scores = _team1Scores;
+@synthesize team1ScoreChanges = _team1ScoreChanges;
 @synthesize team2Scores = _team2Scores;
+@synthesize team2ScoreChanges = _team2ScoreChanges;
 @synthesize bids = _bids;
+@synthesize pointStepper;
+@synthesize pointStepperDisplay;
 @synthesize pointTargetControl;
-@synthesize pointSlider;
 @synthesize suitControl;
 @synthesize biddingTeam;
+@synthesize nextHandButton = _nextHandButton;
 @synthesize currentBid = _currentBid;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
@@ -40,19 +48,29 @@
         case 1:
             self.biddingTeam.enabled = NO;
             self.suitControl.enabled = NO;
-            self.pointSlider.minimumValue = 0;
+            self.pointStepper.minimumValue = 0;
             break;
         case 2:
             self.biddingTeam.enabled = YES;
             self.suitControl.enabled = YES;
-            self.pointSlider.minimumValue = 5;
+            self.pointStepper.minimumValue = 5;
             break;
     }
-    
 }
 
-- (IBAction)pointsSelected:(UISlider *)sender {
+- (IBAction)nextHandPressed {
+    [self.team1Scores addObject:[self.team1Scores objectAtIndex:self.team1Scores.count - 1]];
+    [self.team1ScoreChanges addObject:@""];
+    [self.team2Scores addObject:[self.team2Scores objectAtIndex:self.team2Scores.count - 1]];
+    [self.team2ScoreChanges addObject:@""];
+    [self.bids addObject:@"No bid"];
+    [pitchHandsTableView reloadData];
+    [pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.team1Scores.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (IBAction)pointsChanged {
     [self updateCurrentRow];
+    self.pointStepperDisplay.text = [NSString stringWithFormat:@"%d", (int)self.pointStepper.value];
 }
 
 - (IBAction)suitSelected:(UISegmentedControl *)sender {
@@ -67,50 +85,52 @@
     self.pointTargetControl.enabled = YES;
     switch (pointTargetControl.selectedSegmentIndex) {
         case 0:
-            if ([[self.biddingTeam titleForSegmentAtIndex:self.biddingTeam.selectedSegmentIndex] isEqualToString:@"1"]) {
-                if ((int)self.pointSlider.value >= self.currentBid) {
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", (int)self.pointSlider.value]];
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                } else {
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                }
-            } else {
-                if (13 - (int)self.pointSlider.value >= self.currentBid) {
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", (int)self.pointSlider.value]];
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                } else {
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
-                }
-            }
-            break;
         case 1:
-            if ([[self.biddingTeam titleForSegmentAtIndex:self.biddingTeam.selectedSegmentIndex] isEqualToString:@"2"]) {
-                if ((int)self.pointSlider.value >= self.currentBid) {
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", (int)self.pointSlider.value]];
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                } else {
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                }
-            } else {
-                if (13 - (int)self.pointSlider.value >= self.currentBid) {
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", (int)self.pointSlider.value]];
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                } else {
-                    [self.team2Scores replaceObjectAtIndex:self.team2Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 13 - (int)self.pointSlider.value]];
-                    [self.team1Scores replaceObjectAtIndex:self.team1Scores.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
-                }
-            }
+            [self handleScoringForTeam:@"1" teamScores:self.team1Scores teamScoreChanges:self.team1ScoreChanges selectedTeam:[NSString stringWithFormat:@"%d", pointTargetControl.selectedSegmentIndex + 1]];
+            [self handleScoringForTeam:@"2" teamScores:self.team2Scores teamScoreChanges:self.team2ScoreChanges selectedTeam:[NSString stringWithFormat:@"%d", pointTargetControl.selectedSegmentIndex + 1]];
             break;
         case 2:
-            self.currentBid = (int)self.pointSlider.value;
+            self.currentBid = (int)self.pointStepper.value;
             [self.bids replaceObjectAtIndex:self.bids.count - 1 withObject:[NSString stringWithFormat:@"%d%@ (%@)", self.currentBid, [self.suitControl titleForSegmentAtIndex:self.suitControl.selectedSegmentIndex], [self.biddingTeam titleForSegmentAtIndex:self.biddingTeam.selectedSegmentIndex]]];
-            //self.bid.text = [NSString stringWithFormat:@"%d%@ (%@)", self.currentBid, [self.suitControl titleForSegmentAtIndex:self.suitControl.selectedSegmentIndex], [self.biddingTeam titleForSegmentAtIndex:self.biddingTeam.selectedSegmentIndex]];
             break;
     }
     [pitchHandsTableView reloadData];
+}
+
+- (void)handleScoringForTeam:(NSString *)team
+                  teamScores:(NSMutableArray *)teamScores
+            teamScoreChanges:(NSMutableArray *)teamScoreChanges
+                selectedTeam:(NSString *)selectedTeam {
+    
+    int previousScore = 0;
+    if (teamScores.count > 1) previousScore = [[teamScores objectAtIndex:teamScores.count - 2] intValue];
+    if ([team isEqualToString:[self.biddingTeam titleForSegmentAtIndex:self.biddingTeam.selectedSegmentIndex]]) {
+        if ([team isEqualToString:selectedTeam]) {
+            if ((int)self.pointStepper.value >= self.currentBid) {
+                [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore + (int)self.pointStepper.value]];
+                [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"+%d", (int)self.pointStepper.value]];
+            } else {
+                [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore - self.currentBid]];
+                [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
+            }
+        } else {
+            if (13 - (int)self.pointStepper.value >= self.currentBid) {
+                [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore + 13 - (int)self.pointStepper.value]];
+                [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"+%d", 13 - (int)self.pointStepper.value]];
+            } else {
+                [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore - self.currentBid]];
+                [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid]];
+            }
+        }
+    } else {
+        if ([team isEqualToString:selectedTeam]) {
+            [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore + (int)self.pointStepper.value]];
+            [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"+%d", (int)self.pointStepper.value]];
+        } else {
+            [teamScores replaceObjectAtIndex:teamScores.count - 1 withObject:[NSString stringWithFormat:@"%d", previousScore + 13 - (int)self.pointStepper.value]];
+            [teamScoreChanges replaceObjectAtIndex:teamScoreChanges.count - 1 withObject:[NSString stringWithFormat:@"+%d", 13 - (int)self.pointStepper.value]];
+        }
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -133,7 +153,9 @@
     
     // Configure the cell...
     cell.team1Score.text = [self.team1Scores objectAtIndex:[indexPath row]];
+    cell.team1ScoreChange.text = [self.team1ScoreChanges objectAtIndex:[indexPath row]];
     cell.team2Score.text = [self.team2Scores objectAtIndex:[indexPath row]];
+    cell.team2ScoreChange.text = [self.team2ScoreChanges objectAtIndex:[indexPath row]];
     cell.bid.text = [self.bids objectAtIndex:[indexPath row]];
     
     return cell;
@@ -152,21 +174,26 @@
 {
     [super viewDidLoad];
     self.team1Scores = [[NSMutableArray alloc] initWithObjects:@"0", nil];
+    self.team1ScoreChanges = [[NSMutableArray alloc] initWithObjects:@"", nil];
     self.team2Scores = [[NSMutableArray alloc] initWithObjects:@"0", nil];
-    self.bids = [[NSMutableArray alloc] initWithObjects:@"No bids", nil];
+    self.team2ScoreChanges = [[NSMutableArray alloc] initWithObjects:@"", nil];
+    self.bids = [[NSMutableArray alloc] initWithObjects:@"No bid", nil];
     [pitchHandsTableView setDataSource:self];
     [pitchHandsTableView setDelegate:self];
     self.pointTargetControl.enabled = NO;
+    //self.nextHandButton.enabled = NO;
 }
 
 - (void)viewDidUnload
 {
     [self setPointTargetControl:nil];
-    [self setPointSlider:nil];
     [self setSuitControl:nil];
     [self setBiddingTeam:nil];
     [self setPitchHandsTableView:nil];
     [self setPitchHandsTableView:nil];
+    [self setPointStepperDisplay:nil];
+    [self setPointStepper:nil];
+    [self setNextHandButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

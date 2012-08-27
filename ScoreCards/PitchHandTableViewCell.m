@@ -11,7 +11,9 @@
 @implementation PitchHandTableViewCell
 
 @synthesize team1Score = _team1Score;
+@synthesize team1ScoreChange = _team1ScoreChange;
 @synthesize team2Score = _team2Score;
+@synthesize team2ScoreChange = _team2ScoreChange;
 @synthesize bid = _bid;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

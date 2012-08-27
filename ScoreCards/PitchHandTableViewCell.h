@@ -11,7 +11,9 @@
 @interface PitchHandTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *team1Score;
+@property (strong, nonatomic) IBOutlet UILabel *team1ScoreChange;
 @property (strong, nonatomic) IBOutlet UILabel *team2Score;
+@property (strong, nonatomic) IBOutlet UILabel *team2ScoreChange;
 @property (strong, nonatomic) IBOutlet UILabel *bid;
 
 @end
