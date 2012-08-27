@@ -115,7 +115,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="NIv-hR-2w7" kind="push" id="0bN-CV-Gzg"/>
+                                    <segue destination="NIv-hR-2w7" kind="push" identifier="showPitch" id="0bN-CV-Gzg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -337,7 +337,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
                 <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeam" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>

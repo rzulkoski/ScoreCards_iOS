@@ -7,6 +7,7 @@
 //
 
 #import "SetupViewController.h"
+#import "PitchViewController.h"
 
 @interface SetupViewController ()
 @property (nonatomic) int numPlayers;
@@ -47,6 +48,13 @@
     self.numPlayersControl.selectedSegmentIndex = [self indexForSegmentedControl:self.numPlayersControl withTitle:[NSString stringWithFormat:@"%i", self.numPlayers]];
     self.numPointsControl.selectedSegmentIndex = [self indexForSegmentedControl:self.numPointsControl withTitle:[NSString stringWithFormat:@"%i", self.numPoints]];
     self.teamPlaySwitch.on = self.teamPlay;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showPitch"]) {
+        PitchViewController *vc = [segue destinationViewController];
+        vc.numberOfPlayers = self.numPlayers;
+    }
 }
 
 - (int)indexForSegmentedControl:(UISegmentedControl *)segment withTitle:(NSString *)title {

@@ -41,6 +41,7 @@
 @synthesize biddingTeam;
 @synthesize nextHandButton = _nextHandButton;
 @synthesize currentBid = _currentBid;
+@synthesize numberOfPlayers = _numberOfPlayers;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex) {

@@ -11,5 +11,6 @@
 @interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
+@property (nonatomic) int numberOfPlayers;
 
 @end
