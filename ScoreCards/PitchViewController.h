@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
 @property (nonatomic) int numberOfPlayers;

@@ -166,7 +166,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="kcp-qd-Sbl">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="kcp-qd-Sbl">
                                 <rect key="frame" x="66" y="353" width="235" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -186,7 +186,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="IVk-at-SNC">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="IVk-at-SNC">
                                 <rect key="frame" x="140" y="302" width="161" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -202,7 +202,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="pitch2TeamTableCell" id="L1O-5A-h7t" customClass="PitchHandTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="pitch2TeamTableCell" id="L1O-5A-h7t" customClass="PitchHandTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -272,10 +272,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9uT-N1-4X1">
-                                <rect key="frame" x="83" y="271" width="48" height="23"/>
+                                <rect key="frame" x="20" y="323" width="131" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="NH">
+                                <state key="normal" title="Next Hand">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -286,18 +286,36 @@
                                     <action selector="nextHandPressed" destination="NIv-hR-2w7" eventType="touchUpInside" id="PmY-dg-4i9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cmY-Fk-4Ic">
+                                <rect key="frame" x="169" y="323" width="131" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Remove Hand">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="removeHandPressed" destination="NIv-hR-2w7" eventType="touchUpInside" id="cZ0-WK-5tY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Pitch" id="zQ9-MW-3id"/>
                     <connections>
                         <outlet property="biddingTeamControl" destination="IVk-at-SNC" id="om5-ld-2Zz"/>
+                        <outlet property="biddingTeamControlLabel" destination="ODk-pL-TXD" id="5ze-Fw-1oW"/>
                         <outlet property="nextHandButton" destination="9uT-N1-4X1" id="skU-6t-1Pm"/>
                         <outlet property="pitchHandsTableView" destination="kWn-cv-CfR" id="HW5-Ku-4iA"/>
                         <outlet property="pointStepper" destination="GbO-8Y-MTV" id="kOq-o7-w4D"/>
                         <outlet property="pointStepperDisplay" destination="fUI-hy-5lN" id="OaM-EL-hSD"/>
                         <outlet property="pointTargetControl" destination="1Mr-qO-O8v" id="qN1-NG-2Lo"/>
+                        <outlet property="removeHandButton" destination="cmY-Fk-4Ic" id="rmb-YM-uMb"/>
                         <outlet property="suitControl" destination="kcp-qd-Sbl" id="68z-q1-q5h"/>
+                        <outlet property="suitControlLabel" destination="glJ-EA-hgl" id="IQu-re-28m"/>
                     </connections>
                 </viewController>
             </objects>

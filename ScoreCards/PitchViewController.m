@@ -11,72 +11,121 @@
 
 @interface PitchViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pointTargetControl;
-@property (strong, nonatomic) NSMutableArray *hands;
 @property (strong, nonatomic) IBOutlet UIStepper *pointStepper;
 @property (strong, nonatomic) IBOutlet UILabel *pointStepperDisplay;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *suitControl;
+@property (weak, nonatomic) IBOutlet UILabel *biddingTeamControlLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *biddingTeamControl;
+@property (weak, nonatomic) IBOutlet UILabel *suitControlLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *suitControl;
 @property (strong, nonatomic) IBOutlet UIButton *nextHandButton;
+@property (strong, nonatomic) IBOutlet UIButton *removeHandButton;
+@property (strong, nonatomic) NSMutableArray *hands;
+@property (nonatomic) int numberOfTeams;
 @property (nonatomic) int biddingTeam;
 @property (nonatomic) int currentBid;
 @property (nonatomic) int currentPointValue;
-@property (nonatomic) int numberOfTeams;
  
-
 @end
 
 @implementation PitchViewController
 
-@synthesize pitchHandsTableView;
-@synthesize hands = _hands;
-@synthesize pointStepper;
-@synthesize pointStepperDisplay;
-@synthesize pointTargetControl;
-@synthesize suitControl;
-@synthesize biddingTeamControl = _biddingTeamControl;
-@synthesize nextHandButton = _nextHandButton;
-@synthesize currentBid = _currentBid;
+@synthesize pitchHandsTableView = _pitchHandsTableView;
 @synthesize numberOfPlayers = _numberOfPlayers;
 @synthesize teamPlay = _teamPlay;
+@synthesize pointTargetControl = _pointTargetControl;
+@synthesize pointStepper = _pointStepper;
+@synthesize pointStepperDisplay = _pointStepperDisplay;
+@synthesize biddingTeamControlLabel = _biddingTeamControlLabel;
+@synthesize biddingTeamControl = _biddingTeamControl;
+@synthesize suitControlLabel = _suitControlLabel;
+@synthesize suitControl = _suitControl;
+@synthesize nextHandButton = _nextHandButton;
+@synthesize removeHandButton = _removeHandButton;
+@synthesize hands = _hands;
 @synthesize numberOfTeams = _numberOfTeams;
 @synthesize biddingTeam = _biddingTeam;
+@synthesize currentBid = _currentBid;
 @synthesize currentPointValue = _currentPointValue;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex) {
         case 0:
         case 1:
-            self.biddingTeamControl.enabled = NO;
-            self.suitControl.enabled = NO;
+            [self updateTeamControls];
             self.pointStepper.minimumValue = 0;
+            self.pointStepper.value = [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] >= 0 ? [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] : 0;
+            [self updateCurrentPointValue];
             break;
         case 2:
-            self.biddingTeamControl.enabled = YES;
-            self.suitControl.enabled = YES;
+            self.nextHandButton.hidden = YES;
+            self.removeHandButton.hidden = YES;
+            self.biddingTeamControlLabel.hidden = NO;
+            self.biddingTeamControl.hidden = NO;
+            self.suitControlLabel.hidden = NO;
+            self.suitControl.hidden = NO;
             self.pointStepper.minimumValue = 5;
+            self.pointStepper.value = self.currentBid;
+            [self updateCurrentPointValue];
             break;
     }
 }
 
+- (void)updateCurrentPointValue {
+    self.currentPointValue = (int)self.pointStepper.value;
+    self.pointStepperDisplay.text = [NSString stringWithFormat:@"%d", self.currentPointValue];
+}
+
 - (IBAction)nextHandPressed {
     [self addHand];
-    [pitchHandsTableView reloadData];
-    [pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.hands.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self.pitchHandsTableView reloadData];
+    [self.pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.hands.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (IBAction)removeHandPressed {
+    UIActionSheet *removeLastHandConfirmation = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to remove the current hand? This action cannot be undone." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Hand" otherButtonTitles:nil];
+    [removeLastHandConfirmation setActionSheetStyle:UIActionSheetStyleDefault];
+    [removeLastHandConfirmation showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            break;
+        case 1:
+            [self removeLastHand];
+            [self.pitchHandsTableView reloadData];
+            break;            
+    }
 }
 
 - (IBAction)pointsChanged {
-    self.currentPointValue = (int)self.pointStepper.value;
-    [self updateCurrentRow];
-    self.pointStepperDisplay.text = [NSString stringWithFormat:@"%d", (int)self.pointStepper.value];
+    [self updateCurrentPointValue];
+    if (self.biddingTeamControl.selectedSegmentIndex >=0 && self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
+    if (self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) [self updateTeamControls];
 }
 
 - (IBAction)suitSelected:(UISegmentedControl *)sender {
-    [self updateCurrentRow];
+    if (self.biddingTeamControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
 }
 
 - (IBAction)biddingTeamSelected:(UISegmentedControl *)sender {
     self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
-    [self updateCurrentRow];
+    if (self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
+}
+
+- (void)updateTeamControls {
+    BOOL pointsScoredYet = NO;
+    for (int i = 1; i <= self.numberOfTeams; i++) {
+        if (![[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", i]] isEqualToString:@""]) {
+            pointsScoredYet = YES;
+        }
+    }
+    self.nextHandButton.hidden =  pointsScoredYet ? NO : YES;
+    self.removeHandButton.hidden = self.hands.count > 1 ? NO : YES;
+    self.biddingTeamControlLabel.hidden = YES;
+    self.biddingTeamControl.hidden = YES;
+    self.suitControlLabel.hidden = YES;
+    self.suitControl.hidden = YES;
 }
 
 - (void)updateCurrentRow {
@@ -90,7 +139,7 @@
         self.currentBid = (int)self.pointStepper.value;
         [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d%@ (%d)", self.currentBid, [self.suitControl titleForSegmentAtIndex:self.suitControl.selectedSegmentIndex], self.biddingTeam] forKey:@"Bid"];
     }
-    [pitchHandsTableView reloadData];
+    [self.pitchHandsTableView reloadData];
 }
 
 - (void)handleScoringForTeam:(int)team
@@ -139,6 +188,21 @@
 }
 
 - (void)addHand {
+    self.nextHandButton.hidden = YES;
+    self.removeHandButton.hidden = YES;
+    self.pointTargetControl.selectedSegmentIndex = self.pointTargetControl.numberOfSegments - 1;
+    self.pointTargetControl.enabled = NO;
+    self.biddingTeamControl.selectedSegmentIndex = -1;
+    self.biddingTeamControlLabel.hidden = NO;
+    self.biddingTeamControl.hidden = NO;
+    self.suitControl.selectedSegmentIndex = -1;
+    self.suitControlLabel.hidden = NO;
+    self.suitControl.hidden = NO;
+    self.currentBid = 5;
+    self.pointStepper.minimumValue = 5;
+    self.pointStepper.value = self.currentBid;
+    [self updateCurrentPointValue];
+    
     [self.hands addObject:[[NSMutableDictionary alloc] init]];
     
     for (int i = 1; i <= self.numberOfTeams; i++) {
@@ -147,6 +211,10 @@
         [[self.hands objectAtIndex:self.hands.count-1] setObject:@"" forKey:[NSString stringWithFormat:@"Team%dScoreChange", i]];
     }
     [[self.hands objectAtIndex:self.hands.count-1] setObject:@"No bid" forKey:@"Bid"];
+}
+
+- (void)removeLastHand {
+    if (self.hands.count > 1) [self.hands removeLastObject];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -165,8 +233,10 @@
     self.hands = [[NSMutableArray alloc] init];
     [self addHand];
     self.biddingTeam = 1;
-    [pitchHandsTableView setDataSource:self];
-    [pitchHandsTableView setDelegate:self];
+    self.currentBid = 5;
+    [self updateCurrentPointValue];
+    [self.pitchHandsTableView setDataSource:self];
+    [self.pitchHandsTableView setDelegate:self];
     self.pointTargetControl.enabled = NO;
     //self.nextHandButton.enabled = NO;
 }
@@ -181,6 +251,9 @@
     [self setPointStepperDisplay:nil];
     [self setPointStepper:nil];
     [self setNextHandButton:nil];
+    [self setSuitControlLabel:nil];
+    [self setBiddingTeamControlLabel:nil];
+    [self setRemoveHandButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
