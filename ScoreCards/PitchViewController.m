@@ -113,8 +113,10 @@
             pointsScoredYet = YES;
         }
     }
-    self.nextHandButton.hidden =  pointsScoredYet ? NO : YES;
-    self.removeHandButton.hidden = self.hands.count > 1 ? NO : YES;
+    self.nextHandButton.hidden = NO;
+    self.nextHandButton.alpha =  pointsScoredYet ? 1.0 : 0.5;
+    self.removeHandButton.hidden = NO;
+    self.removeHandButton.alpha = self.hands.count > 1 ? 1.0 : 0.5;
     self.biddingTeamControlLabel.hidden = YES;
     self.biddingTeamControl.hidden = YES;
     self.suitControlLabel.hidden = YES;

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *numPlayersControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *numPointsControl;
 @property (weak, nonatomic) IBOutlet UISwitch *teamPlaySwitch;
+@property (weak, nonatomic) IBOutlet UIButton *startGameButton;
 @end
 
 @implementation SetupViewController
@@ -26,6 +27,7 @@
 @synthesize numPlayersControl = _numPlayersControl;
 @synthesize numPointsControl = _numPointsControl;
 @synthesize teamPlaySwitch = _teamPlaySwitch;
+@synthesize startGameButton = _startGameButton;
 
 - (int)numPlayers {
     if (!_numPlayers) _numPlayers = 2;
@@ -34,24 +36,65 @@
 
 - (IBAction)numPlayersSelected:(UISegmentedControl *)sender {
     self.numPlayers = [[sender titleForSegmentAtIndex:sender.selectedSegmentIndex] intValue];
-    NSLog(@"numPlayers = %i", self.numPlayers);
+    [self updateSetupControls];
 }
 
 - (IBAction)numPointsSelected:(UISegmentedControl *)sender {
     self.numPoints = [[sender titleForSegmentAtIndex:sender.selectedSegmentIndex] intValue];
+    [self updateSetupControls];
+}
+
+- (IBAction)teamPlaySelected:(UISwitch *)sender {
+    self.teamPlay = sender.on;
 }
 
 - (void)loadDefaults {
     self.numPlayers = 4;
     self.numPoints = 13;
     self.teamPlay = YES;
+    self.teamPlaySwitch.enabled = NO;
     [self updateSetupControls];
 }
 
 - (void)updateSetupControls {
+    switch (self.numPlayers) {
+        case 2:
+        case 3:
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"4"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"5"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"10"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"13"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"14"]];
+            self.numPoints = self.numPoints <= 5 ? self.numPoints : -1;
+            self.teamPlaySwitch.enabled = NO;
+            self.teamPlay = NO;
+            break;
+        case 4:
+        case 6:
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"4"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"5"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"10"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"13"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"14"]];
+            self.teamPlaySwitch.enabled = self.numPoints > 5 ? NO : YES;
+            self.teamPlay = self.numPoints > 5 ? YES : self.teamPlay;
+            break;
+        case 5:
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"4"]];
+            [self.numPointsControl setEnabled:YES forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"5"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"10"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"13"]];
+            [self.numPointsControl setEnabled:NO forSegmentAtIndex:[self indexForSegmentedControl:self.numPointsControl withTitle:@"14"]];
+            self.numPoints = self.numPoints <= 5 ? self.numPoints : -1;
+            self.teamPlaySwitch.enabled = NO;
+            self.teamPlay = NO;
+            break;
+    }
     self.numPlayersControl.selectedSegmentIndex = [self indexForSegmentedControl:self.numPlayersControl withTitle:[NSString stringWithFormat:@"%i", self.numPlayers]];
     self.numPointsControl.selectedSegmentIndex = [self indexForSegmentedControl:self.numPointsControl withTitle:[NSString stringWithFormat:@"%i", self.numPoints]];
     self.teamPlaySwitch.on = self.teamPlay;
+    self.startGameButton.enabled = self.numPoints > 0 ? YES : NO;
+    self.startGameButton.alpha = self.numPoints > 0 ? 1.0 : 0.5;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -104,6 +147,7 @@
     [self setNumPlayersControl:nil];
     [self setNumPointsControl:nil];
     [self setTeamPlaySwitch:nil];
+    [self setStartGameButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

@@ -105,6 +105,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="yOK-KV-n9r" userLabel="teamPlaySwitch">
                                 <rect key="frame" x="20" y="226" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="teamPlaySelected:" destination="WnC-cA-zH0" eventType="valueChanged" id="YAN-y0-LAU"/>
+                                </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qHY-I2-8oc">
                                 <rect key="frame" x="20" y="298" width="280" height="44"/>
@@ -128,6 +131,7 @@
                     <connections>
                         <outlet property="numPlayersControl" destination="Qbr-Az-FZz" id="NR8-Xu-5XB"/>
                         <outlet property="numPointsControl" destination="kzI-fG-6gH" id="azK-F6-3ko"/>
+                        <outlet property="startGameButton" destination="qHY-I2-8oc" id="LmP-W0-mhx"/>
                         <outlet property="teamPlaySwitch" destination="yOK-KV-n9r" id="wuc-Ec-xAM"/>
                     </connections>
                 </viewController>
@@ -156,7 +160,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3DO-Yn-gDW">
-                                <rect key="frame" x="20" y="273" width="53" height="21"/>
+                                <rect key="frame" x="20" y="270" width="53" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -170,7 +174,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="kcp-qd-Sbl">
-                                <rect key="frame" x="66" y="353" width="235" height="44"/>
+                                <rect key="frame" x="87" y="353" width="214" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="S"/>
@@ -182,15 +186,15 @@
                                     <action selector="suitSelected:" destination="NIv-hR-2w7" eventType="valueChanged" id="E3F-cc-WxU"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Bidding Team:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ODk-pL-TXD">
-                                <rect key="frame" x="20" y="313" width="111" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Bidder:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ODk-pL-TXD">
+                                <rect key="frame" x="20" y="313" width="59" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="IVk-at-SNC">
-                                <rect key="frame" x="140" y="302" width="161" height="44"/>
+                                <rect key="frame" x="87" y="302" width="214" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="1"/>
@@ -357,7 +361,9 @@
         <class className="PitchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
+                <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControlLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>
@@ -378,8 +384,10 @@
             <relationships>
                 <relationship kind="action" name="numPlayersSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="numPointsSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="teamPlaySelected:" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="numPlayersControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="numPointsControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="startGameButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="teamPlaySwitch" candidateClass="UISwitch"/>
             </relationships>
         </class>
