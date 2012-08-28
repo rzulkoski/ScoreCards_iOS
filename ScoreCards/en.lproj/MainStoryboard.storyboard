@@ -291,7 +291,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pitch" id="zQ9-MW-3id"/>
                     <connections>
-                        <outlet property="biddingTeam" destination="IVk-at-SNC" id="4en-uX-5Tv"/>
+                        <outlet property="biddingTeamControl" destination="IVk-at-SNC" id="om5-ld-2Zz"/>
                         <outlet property="nextHandButton" destination="9uT-N1-4X1" id="skU-6t-1Pm"/>
                         <outlet property="pitchHandsTableView" destination="kWn-cv-CfR" id="HW5-Ku-4iA"/>
                         <outlet property="pointStepper" destination="GbO-8Y-MTV" id="kOq-o7-w4D"/>
@@ -322,44 +322,6 @@
             <point key="canvasLocation" x="370" y="112"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="PitchHandTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchHandTableViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bid" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="team1Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="team1ScoreChange" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="team2Score" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="team2ScoreChange" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PitchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="biddingTeam" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pitchHandsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="pointStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="pointStepperDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pointTargetControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="suitControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="ScoreCardsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsViewController.h"/>
-        </class>
-        <class className="SetupViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="numPlayersSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="numPlayersControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="numPointsControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="teamPlaySwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
