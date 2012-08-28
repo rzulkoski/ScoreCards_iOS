@@ -90,11 +90,13 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
-            break;
-        case 1:
             [self removeLastHand];
             [self.pitchHandsTableView reloadData];
-            break;            
+            [self updateTeamControls];
+            break;
+        case 1:
+            NSLog(@"Cancelled");
+            break;
     }
 }
 
