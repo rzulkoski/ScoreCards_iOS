@@ -59,6 +59,19 @@
         PitchViewController *vc = [segue destinationViewController];
         vc.numberOfPlayers = self.numPlayers;
         vc.numberOfPointsPerHand = self.numPoints;
+        switch (self.numPoints) {
+            case 4:
+            case 5:
+                vc.minimumBid = 2;
+                break;
+            case 10:
+                vc.minimumBid = 4;
+                break;
+            case 13:
+            case 14:
+                vc.minimumBid = 5;
+                break;
+        }
         vc.teamPlay = self.teamPlay;
     }
 }

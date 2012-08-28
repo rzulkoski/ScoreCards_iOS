@@ -45,29 +45,19 @@
 @synthesize hands = _hands;
 @synthesize numberOfTeams = _numberOfTeams;
 @synthesize biddingTeam = _biddingTeam;
+@synthesize minimumBid = _minimumBid;
 @synthesize currentBid = _currentBid;
 @synthesize currentPointValue = _currentPointValue;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
-    switch (sender.selectedSegmentIndex) {
-        case 0:
-        case 1:
-            [self updateTeamControls];
-            self.pointStepper.minimumValue = 0;
-            self.pointStepper.value = [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] >= 0 ? [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] : 0;
-            [self updateCurrentPointValue];
-            break;
-        case 2:
-            self.nextHandButton.hidden = YES;
-            self.removeHandButton.hidden = YES;
-            self.biddingTeamControlLabel.hidden = NO;
-            self.biddingTeamControl.hidden = NO;
-            self.suitControlLabel.hidden = NO;
-            self.suitControl.hidden = NO;
-            self.pointStepper.minimumValue = 5;
-            self.pointStepper.value = self.currentBid;
-            [self updateCurrentPointValue];
-            break;
+    if (sender.selectedSegmentIndex < sender.numberOfSegments - 1) {
+        [self updateTeamControls];
+        self.pointStepper.minimumValue = 0;
+        self.pointStepper.value = [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] >= 0 ? [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScoreChange", self.pointTargetControl.selectedSegmentIndex+1]] intValue] : 0;
+        [self updateCurrentPointValue];
+    } else {
+        [self updateBidControls];
+
     }
 }
 
@@ -131,6 +121,17 @@
     self.suitControl.hidden = YES;
 }
 
+- (void)updateBidControls {
+    self.nextHandButton.hidden = YES;
+    self.removeHandButton.hidden = YES;
+    self.biddingTeamControlLabel.hidden = NO;
+    self.biddingTeamControl.hidden = NO;
+    self.suitControlLabel.hidden = NO;
+    self.suitControl.hidden = NO;
+    self.pointStepper.minimumValue = self.minimumBid;
+    self.pointStepper.value = self.currentBid;
+}
+
 - (void)updateCurrentRow {
     self.pointTargetControl.enabled = YES;
     
@@ -191,19 +192,12 @@
 }
 
 - (void)addHand {
-    self.nextHandButton.hidden = YES;
-    self.removeHandButton.hidden = YES;
+    self.currentBid = self.minimumBid;
+    [self updateBidControls];
     self.pointTargetControl.selectedSegmentIndex = self.pointTargetControl.numberOfSegments - 1;
     self.pointTargetControl.enabled = NO;
     self.biddingTeamControl.selectedSegmentIndex = -1;
-    self.biddingTeamControlLabel.hidden = NO;
-    self.biddingTeamControl.hidden = NO;
     self.suitControl.selectedSegmentIndex = -1;
-    self.suitControlLabel.hidden = NO;
-    self.suitControl.hidden = NO;
-    self.currentBid = 5;
-    self.pointStepper.minimumValue = 5;
-    self.pointStepper.value = self.currentBid;
     [self updateCurrentPointValue];
     
     [self.hands addObject:[[NSMutableDictionary alloc] init]];
@@ -234,15 +228,12 @@
     [super viewDidLoad];
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     self.pointStepper.maximumValue = self.numberOfPointsPerHand;
+    self.biddingTeam = 1;
     self.hands = [[NSMutableArray alloc] init];
     [self addHand];
-    self.biddingTeam = 1;
-    self.currentBid = 5;
     [self updateCurrentPointValue];
     [self.pitchHandsTableView setDataSource:self];
     [self.pitchHandsTableView setDelegate:self];
-    self.pointTargetControl.enabled = NO;
-    //self.nextHandButton.enabled = NO;
 }
 
 - (void)viewDidUnload
