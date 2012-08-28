@@ -37,6 +37,10 @@
     NSLog(@"numPlayers = %i", self.numPlayers);
 }
 
+- (IBAction)numPointsSelected:(UISegmentedControl *)sender {
+    self.numPoints = [[sender titleForSegmentAtIndex:sender.selectedSegmentIndex] intValue];
+}
+
 - (void)loadDefaults {
     self.numPlayers = 4;
     self.numPoints = 13;
@@ -54,6 +58,7 @@
     if ([segue.identifier isEqualToString:@"showPitch"]) {
         PitchViewController *vc = [segue destinationViewController];
         vc.numberOfPlayers = self.numPlayers;
+        vc.numberOfPointsPerHand = self.numPoints;
         vc.teamPlay = self.teamPlay;
     }
 }

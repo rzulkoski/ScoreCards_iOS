@@ -31,6 +31,7 @@
 
 @synthesize pitchHandsTableView = _pitchHandsTableView;
 @synthesize numberOfPlayers = _numberOfPlayers;
+@synthesize numberOfPointsPerHand = _numberOfPointsPerHand;
 @synthesize teamPlay = _teamPlay;
 @synthesize pointTargetControl = _pointTargetControl;
 @synthesize pointStepper = _pointStepper;
@@ -152,9 +153,9 @@
     
     int previousScore = self.hands.count > 1 ? [[[self.hands objectAtIndex:self.hands.count-2] objectForKey:teamScore] intValue] : 0;
     
-    if (team != self.biddingTeam || (team == selectedTeam && self.currentPointValue >= self.currentBid) || (team != selectedTeam && 13 - self.currentPointValue >= self.currentBid)) {
-        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d", previousScore + (team == selectedTeam ? self.currentPointValue : 13 - self.currentPointValue)] forKey:teamScore];
-        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"+%d", team == selectedTeam ? self.currentPointValue : 13 - self.currentPointValue] forKey:teamScoreChange];
+    if (team != self.biddingTeam || (team == selectedTeam && self.currentPointValue >= self.currentBid) || (team != selectedTeam && self.numberOfPointsPerHand - self.currentPointValue >= self.currentBid)) {
+        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d", previousScore + (team == selectedTeam ? self.currentPointValue : self.numberOfPointsPerHand - self.currentPointValue)] forKey:teamScore];
+        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"+%d", team == selectedTeam ? self.currentPointValue : self.numberOfPointsPerHand - self.currentPointValue] forKey:teamScoreChange];
     } else {
         [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d", previousScore - self.currentBid] forKey:teamScore];
         [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d", 0 - self.currentBid] forKey:teamScoreChange];
@@ -232,6 +233,7 @@
 {
     [super viewDidLoad];
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
+    self.pointStepper.maximumValue = self.numberOfPointsPerHand;
     self.hands = [[NSMutableArray alloc] init];
     [self addHand];
     self.biddingTeam = 1;

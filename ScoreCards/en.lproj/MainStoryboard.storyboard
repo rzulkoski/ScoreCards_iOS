@@ -63,6 +63,9 @@
                                     <segment title="13"/>
                                     <segment title="14"/>
                                 </segments>
+                                <connections>
+                                    <action selector="numPointsSelected:" destination="WnC-cA-zH0" eventType="valueChanged" id="SfD-OY-0UO"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number of points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gpb-fc-z1q">
                                 <rect key="frame" x="20" y="106" width="280" height="21"/>
@@ -340,6 +343,47 @@
             <point key="canvasLocation" x="370" y="112"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="PitchHandTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchHandTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bid" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team1Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team1ScoreChange" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team2Score" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="team2ScoreChange" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PitchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="biddingTeamControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="biddingTeamControlLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pitchHandsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="pointStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="pointStepperDisplay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pointTargetControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="removeHandButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="suitControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="suitControlLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ScoreCardsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsViewController.h"/>
+        </class>
+        <class className="SetupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="numPlayersSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="numPointsSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="numPlayersControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="numPointsControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="teamPlaySwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
