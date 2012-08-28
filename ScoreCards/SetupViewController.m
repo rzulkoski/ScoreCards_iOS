@@ -54,6 +54,7 @@
     if ([segue.identifier isEqualToString:@"showPitch"]) {
         PitchViewController *vc = [segue destinationViewController];
         vc.numberOfPlayers = self.numPlayers;
+        vc.teamPlay = self.teamPlay;
     }
 }
 

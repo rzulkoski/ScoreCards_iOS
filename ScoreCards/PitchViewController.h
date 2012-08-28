@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
 @property (nonatomic) int numberOfPlayers;
+@property (nonatomic) BOOL teamPlay;
 
 @end
