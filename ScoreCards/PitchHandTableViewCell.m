@@ -23,6 +23,8 @@
 @synthesize team6Score = _team6Score;
 @synthesize team6ScoreChange = _team6ScoreChange;
 @synthesize bid = _bid;
+@synthesize bidSuit = _bidSuit;
+@synthesize bidTeam1 = _bidTeam1;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -61,7 +61,6 @@
 
 - (void)adjustMaxPointsIfNeeded {
     if (self.numberOfTeams > 2 && self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) self.pointStepper.maximumValue = self.numberOfPointsPerHand - [self pointsScoredSoFar] + self.pointStepper.value;
-    NSLog(@"perHand=%d, soFar=%d, byTeam=%d, MAX=%d", self.numberOfPointsPerHand, [self pointsScoredSoFar], (int)self.pointStepper.value, (int)self.pointStepper.maximumValue);
 }
 
 - (void)updatePointStepperDisplay {
@@ -99,14 +98,16 @@
         [self adjustMaxPointsIfNeeded];
         [self showTeamControls]; 
     }
-}  // MAY NEED ADJUSTMENT
+}
 
 - (IBAction)suitSelected:(UISegmentedControl *)sender {
+    [[self.hands objectAtIndex:self.hands.count-1] setObject:[sender imageForSegmentAtIndex:sender.selectedSegmentIndex] forKey:@"BidSuit"];
     if (self.biddingTeamControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
 }
 
 - (IBAction)biddingTeamSelected:(UISegmentedControl *)sender {
     self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
+    [[self.hands objectAtIndex:self.hands.count-1] setObject:[UIImage imageNamed:[NSString stringWithFormat:@"team%d.png", self.biddingTeam]] forKey:@"BidTeam1"];
     if (self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
 }
 
@@ -115,7 +116,7 @@
     
     if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments - 1){
         self.currentBid = (int)self.pointStepper.value;
-        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d%@ (%d)", self.currentBid, [self.suitControl titleForSegmentAtIndex:self.suitControl.selectedSegmentIndex], self.biddingTeam] forKey:@"Bid"];
+        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:self.currentBid >= 10 ? @"%d       " : @"%d     ", self.currentBid] forKey:@"Bid"];
     } else {
         for (int i = 1; i <= self.numberOfTeams; i++) {
             [self handleScoringForTeam:i];
@@ -206,6 +207,8 @@
             break;
     }
     cell.bid.text = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"Bid"];
+    if ([[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"]) cell.bidSuit.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"];
+    if ([[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"]) cell.bidTeam1.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"];
     
     return cell;
 }
@@ -244,7 +247,7 @@
 
 - (void)showTeamControls {
     self.nextHandButton.hidden = NO;
-    if ([self pointsScoredSoFar] > 0 && (self.numberOfTeams == 2 || [self pointsScoredSoFar] == self.numberOfPointsPerHand)) {
+    if ([self pointsScoredSoFar] > 0 && (self.numberOfTeams == 2 || [self pointsScoredSoFar] >= 3)) {
         self.nextHandButton.alpha = 1.0;
         self.nextHandButton.enabled = YES;
     } else {
@@ -288,9 +291,21 @@
     }
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self startNewGame];
+    [self.suitControl setImage:[UIImage imageNamed:@"spade.png"] forSegmentAtIndex:0];
+    [self.suitControl setImage:[UIImage imageNamed:@"diamond.png"] forSegmentAtIndex:1];
+    [self.suitControl setImage:[UIImage imageNamed:@"club.png"] forSegmentAtIndex:2];
+    [self.suitControl setImage:[UIImage imageNamed:@"heart.png"] forSegmentAtIndex:3];
     [self.pitchHandsTableView setDataSource:self];
     [self.pitchHandsTableView setDelegate:self];
 }

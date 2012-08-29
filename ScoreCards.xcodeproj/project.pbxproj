@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9440409615EDAEFF0039F542 /* diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409415EDAEFF0039F542 /* diamond.png */; };
+		9440409915EDB0AC0039F542 /* club.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409815EDB0AC0039F542 /* club.png */; };
+		9440409C15EDB5BB0039F542 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409A15EDB5BB0039F542 /* heart.png */; };
+		9440409D15EDB5BB0039F542 /* spade.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409B15EDB5BB0039F542 /* spade.png */; };
+		944040A515EDC5540039F542 /* team1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409F15EDC5540039F542 /* team1.png */; };
+		944040A615EDC5540039F542 /* team2.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A015EDC5540039F542 /* team2.png */; };
+		944040A715EDC5540039F542 /* team3.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A115EDC5540039F542 /* team3.png */; };
+		944040A815EDC5540039F542 /* team4.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A215EDC5540039F542 /* team4.png */; };
+		944040A915EDC5540039F542 /* team5.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A315EDC5540039F542 /* team5.png */; };
+		944040AA15EDC5540039F542 /* team6.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A415EDC5540039F542 /* team6.png */; };
 		947A0E8915EA734C003AEF56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8815EA734C003AEF56 /* UIKit.framework */; };
 		947A0E8B15EA734C003AEF56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8A15EA734C003AEF56 /* Foundation.framework */; };
 		947A0E8D15EA734C003AEF56 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8C15EA734C003AEF56 /* CoreGraphics.framework */; };
@@ -21,6 +31,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9440409415EDAEFF0039F542 /* diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond.png; sourceTree = "<group>"; };
+		9440409815EDB0AC0039F542 /* club.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = club.png; sourceTree = "<group>"; };
+		9440409A15EDB5BB0039F542 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		9440409B15EDB5BB0039F542 /* spade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spade.png; sourceTree = "<group>"; };
+		9440409F15EDC5540039F542 /* team1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team1.png; sourceTree = "<group>"; };
+		944040A015EDC5540039F542 /* team2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team2.png; sourceTree = "<group>"; };
+		944040A115EDC5540039F542 /* team3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team3.png; sourceTree = "<group>"; };
+		944040A215EDC5540039F542 /* team4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team4.png; sourceTree = "<group>"; };
+		944040A315EDC5540039F542 /* team5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team5.png; sourceTree = "<group>"; };
+		944040A415EDC5540039F542 /* team6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team6.png; sourceTree = "<group>"; };
 		947A0E8415EA734C003AEF56 /* ScoreCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		947A0E8815EA734C003AEF56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		947A0E8A15EA734C003AEF56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,6 +76,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9440409E15EDB5C50039F542 /* CardSuitImages */ = {
+			isa = PBXGroup;
+			children = (
+				9440409815EDB0AC0039F542 /* club.png */,
+				9440409415EDAEFF0039F542 /* diamond.png */,
+				9440409A15EDB5BB0039F542 /* heart.png */,
+				9440409B15EDB5BB0039F542 /* spade.png */,
+			);
+			name = CardSuitImages;
+			sourceTree = "<group>";
+		};
+		944040AB15EDC55D0039F542 /* TeamNumberImages */ = {
+			isa = PBXGroup;
+			children = (
+				9440409F15EDC5540039F542 /* team1.png */,
+				944040A015EDC5540039F542 /* team2.png */,
+				944040A115EDC5540039F542 /* team3.png */,
+				944040A215EDC5540039F542 /* team4.png */,
+				944040A315EDC5540039F542 /* team5.png */,
+				944040A415EDC5540039F542 /* team6.png */,
+			);
+			name = TeamNumberImages;
+			sourceTree = "<group>";
+		};
 		947A0E7915EA734C003AEF56 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +130,8 @@
 		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
 			isa = PBXGroup;
 			children = (
+				9440409E15EDB5C50039F542 /* CardSuitImages */,
+				944040AB15EDC55D0039F542 /* TeamNumberImages */,
 				94D3E5E315EBF02900D96DBE /* Pitch */,
 				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
 				947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */,
@@ -175,6 +221,16 @@
 			files = (
 				947A0E9315EA734C003AEF56 /* InfoPlist.strings in Resources */,
 				947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */,
+				9440409615EDAEFF0039F542 /* diamond.png in Resources */,
+				9440409915EDB0AC0039F542 /* club.png in Resources */,
+				9440409C15EDB5BB0039F542 /* heart.png in Resources */,
+				9440409D15EDB5BB0039F542 /* spade.png in Resources */,
+				944040A515EDC5540039F542 /* team1.png in Resources */,
+				944040A615EDC5540039F542 /* team2.png in Resources */,
+				944040A715EDC5540039F542 /* team3.png in Resources */,
+				944040A815EDC5540039F542 /* team4.png in Resources */,
+				944040A915EDC5540039F542 /* team5.png in Resources */,
+				944040AA15EDC5540039F542 /* team6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

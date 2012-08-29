@@ -23,5 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *team6Score;
 @property (strong, nonatomic) IBOutlet UILabel *team6ScoreChange;
 @property (strong, nonatomic) IBOutlet UILabel *bid;
+@property (strong, nonatomic) IBOutlet UIImageView *bidSuit;
+@property (strong, nonatomic) IBOutlet UIImageView *bidTeam1;
 
 @end
