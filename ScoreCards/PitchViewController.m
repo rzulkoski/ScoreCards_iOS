@@ -207,8 +207,8 @@
             break;
     }
     cell.bid.text = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"Bid"];
-    if ([[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"]) cell.bidSuit.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"];
-    if ([[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"]) cell.bidTeam1.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"];
+    cell.bidSuit.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"];
+    cell.bidTeam1.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"];
     
     return cell;
 }

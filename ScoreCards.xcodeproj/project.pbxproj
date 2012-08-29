@@ -41,6 +41,7 @@
 		944040A215EDC5540039F542 /* team4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team4.png; sourceTree = "<group>"; };
 		944040A315EDC5540039F542 /* team5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team5.png; sourceTree = "<group>"; };
 		944040A415EDC5540039F542 /* team6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team6.png; sourceTree = "<group>"; };
+		945B553015EDD665003FAD05 /* ScoreCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ScoreCards.entitlements; sourceTree = "<group>"; };
 		947A0E8415EA734C003AEF56 /* ScoreCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		947A0E8815EA734C003AEF56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		947A0E8A15EA734C003AEF56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +149,7 @@
 		947A0E8F15EA734C003AEF56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				945B553015EDD665003FAD05 /* ScoreCards.entitlements */,
 				947A0E9015EA734C003AEF56 /* ScoreCards-Info.plist */,
 				947A0E9115EA734C003AEF56 /* InfoPlist.strings */,
 				947A0E9415EA734C003AEF56 /* main.m */,
@@ -272,6 +274,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		945B552D15EDD437003FAD05 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan Zulkoski";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "F42F506C-22A4-4C78-A0F0-66EF36BC20E2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F42F506C-22A4-4C78-A0F0-66EF36BC20E2";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		945B552E15EDD437003FAD05 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
+				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F42F506C-22A4-4C78-A0F0-66EF36BC20E2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		947A0EA015EA734C003AEF56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -280,7 +321,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ryan Zulkoski (8WP33299KA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan Zulkoski (8WP33299KA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -295,6 +337,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "313D8369-0147-48C4-8827-CE82D3C33DF2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "313D8369-0147-48C4-8827-CE82D3C33DF2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -307,6 +351,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -316,6 +361,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "F42F506C-22A4-4C78-A0F0-66EF36BC20E2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -324,10 +370,12 @@
 		947A0EA315EA734C003AEF56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ryan Zulkoski (8WP33299KA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
 				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "313D8369-0147-48C4-8827-CE82D3C33DF2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -335,10 +383,12 @@
 		947A0EA415EA734C003AEF56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
 				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F42F506C-22A4-4C78-A0F0-66EF36BC20E2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -351,18 +401,20 @@
 			buildConfigurations = (
 				947A0EA015EA734C003AEF56 /* Debug */,
 				947A0EA115EA734C003AEF56 /* Release */,
+				945B552D15EDD437003FAD05 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		947A0EA215EA734C003AEF56 /* Build configuration list for PBXNativeTarget "ScoreCards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				947A0EA315EA734C003AEF56 /* Debug */,
 				947A0EA415EA734C003AEF56 /* Release */,
+				945B552E15EDD437003FAD05 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 	};
