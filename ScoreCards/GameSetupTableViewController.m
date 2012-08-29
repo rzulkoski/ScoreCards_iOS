@@ -76,6 +76,7 @@
     [super viewDidLoad];
     
     // Init Options for Pitch
+    self.title = @"Pitch Setup";
     self.dataForTable = [[NSMutableArray alloc] init];
     for (int row = 0; row < 4; row++) {
         [self.dataForTable addObject:[[NSMutableDictionary alloc] init]];
