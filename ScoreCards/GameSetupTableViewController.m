@@ -9,6 +9,7 @@
 #import "GameSetupTableViewController.h"
 #import "GameSetup1RowOptionTableViewCell.h"
 #import "GameSetup2RowOptionTableViewCell.h"
+#import "PitchViewController.h"
 
 @interface GameSetupTableViewController ()
 
@@ -46,6 +47,28 @@
             break;
     }
     return optionValueDisplay;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showPitch"]) {
+        PitchViewController *vc = [segue destinationViewController];
+        vc.numberOfPlayers = [[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValue"] intValue];
+        vc.numberOfPointsPerHand = [[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValue"] intValue];
+        switch (vc.numberOfPointsPerHand) {
+            case 4:
+            case 5:
+                vc.minimumBid = 2;
+                break;
+            case 10:
+                vc.minimumBid = 4;
+                break;
+            case 13:
+            case 14:
+                vc.minimumBid = 5;
+                break;
+        }
+        vc.teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValue"] isEqualToString:@"Yes"] ? YES : NO;
+    }
 }
 
 - (void)viewDidLoad
