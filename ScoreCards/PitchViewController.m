@@ -93,10 +93,12 @@
 
 - (IBAction)pointsChanged {
     [self updatePointStepperDisplay];
-    [self updateCurrentRow];
     if (self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) {
+        [self updateCurrentRow];
         [self adjustMaxPointsIfNeeded];
         [self showTeamControls]; 
+    } else {
+        if (self.biddingTeamControl.selectedSegmentIndex >= 0 && self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
     }
 }
 
