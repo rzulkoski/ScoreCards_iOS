@@ -10,6 +10,8 @@
 
 @implementation ScoreCardsAppDelegate
 
+@synthesize splashView = _splashView;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.

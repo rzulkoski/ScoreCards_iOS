@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="0Zv-wR-pLg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Ws1-gP-GTe">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -140,7 +140,37 @@
                     <navigationItem key="navigationItem" title="ScoreCards" id="tcF-2w-1CO"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="771" y="112"/>
+            <point key="canvasLocation" x="769" y="112"/>
+        </scene>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="uDE-KE-Jbs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HJd-ZB-ala" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController wantsFullScreenLayout="YES" id="Ws1-gP-GTe" customClass="SplashScreenViewController" sceneMemberID="viewController">
+                    <button key="view" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="zSm-rg-gpb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" image="Default@2x.png">
+                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <segue destination="0Zv-wR-pLg" kind="modal" identifier="enterApp" id="Dn5-eK-lnw"/>
+                        </connections>
+                    </button>
+                    <navigationItem key="navigationItem" id="5gh-9e-cGS"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="splashScreenButton" destination="zSm-rg-gpb" id="9lo-xU-K0n"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-112" y="112"/>
         </scene>
         <!--Game Setup Table View Controller - Game Setup-->
         <scene sceneID="6jh-P9-p8e">
@@ -580,6 +610,8 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Yu-QP-XXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="0Zv-wR-pLg" customClass="ScoreCardsNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="1sW-7p-anC"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Of4-Sh-I9I">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -590,13 +622,16 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="6zA-Mh-sZh" kind="relationship" relationship="rootViewController" id="GMV-Fc-F9f"/>
+                        <segue destination="6zA-Mh-sZh" kind="relationship" relationship="rootViewController" id="m4G-pe-Nz9"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="335" y="112"/>
+            <point key="canvasLocation" x="328" y="112"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Default@2x.png" width="640" height="960"/>
+    </resources>
     <classes>
         <class className="GameSetup1RowOptionTableViewCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetup1RowOptionTableViewCell.h"/>
@@ -665,6 +700,12 @@
         </class>
         <class className="ScoreCardsNavigationViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsNavigationViewController.h"/>
+        </class>
+        <class className="SplashScreenViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="splashScreenButton" candidateClass="UIButton"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
