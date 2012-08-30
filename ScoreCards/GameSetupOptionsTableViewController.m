@@ -7,6 +7,7 @@
 //
 
 #import "GameSetupOptionsTableViewController.h"
+#import "GameSetupOptionChoicesTableViewCell.h"
 
 @interface GameSetupOptionsTableViewController ()
 
@@ -14,7 +15,10 @@
 
 @implementation GameSetupOptionsTableViewController
 
-@synthesize options = _options;
+@synthesize delegate = _delegate;
+@synthesize optionSelected = _optionSelected;
+@synthesize choices = _choices;
+@synthesize validChoices = _validChoices;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,12 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // TEMP!!!!!!!
-    self.title = @"Number of Players";
-    self.options = [[NSArray alloc] initWithObjects:[[NSArray alloc] initWithObjects:@"2", @"2 Players", nil],
-                                                    [[NSArray alloc] initWithObjects:@"3", @"3 Players", nil],
-                                                    [[NSArray alloc] initWithObjects:@"4", @"4 Players", nil],nil];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -53,7 +52,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
+// #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -62,15 +61,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.options.count;
+    return self.choices.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"optionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GameSetupOptionChoicesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    cell.textLabel.text = [[self.options objectAtIndex:indexPath.row] objectAtIndex:1];
+    cell.optionChoice.text = [self.choices objectAtIndex:indexPath.row];
+    if (![self.validChoices containsObject:[NSString stringWithFormat:@"%d", indexPath.row]]) {
+        [cell setUserInteractionEnabled:NO];
+        cell.optionChoice.textColor = [UIColor grayColor];
+    } else {
+        [cell setUserInteractionEnabled:YES];
+        cell.optionChoice.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
+    }
     
     return cell;
 }
@@ -118,6 +124,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"RowSelected has been called!");
+    [self.delegate setChoice:indexPath.row forOption:self.optionSelected];
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

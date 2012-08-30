@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GameSetupChoicesDelegate <NSObject>
+- (void)setChoice:(int)choice forOption:(int)option;
+@end
+
 @interface GameSetupOptionsTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *options;
+@property (nonatomic, strong) id <GameSetupChoicesDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *choices;
+@property (nonatomic, strong) NSArray *validChoices;
+@property (nonatomic) int optionSelected;
 
 @end

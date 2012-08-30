@@ -7,6 +7,7 @@
 //
 
 #import "GameSetupTableViewController.h"
+#import "GameSetupOptionsTableViewController.h"
 #import "GameSetup1RowOptionTableViewCell.h"
 #import "GameSetup2RowOptionTableViewCell.h"
 #import "PitchViewController.h"
@@ -14,27 +15,111 @@
 @interface GameSetupTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataForTable;
+@property (nonatomic) int numberOfOptions;
 
 @end
 
 @implementation GameSetupTableViewController
 
 @synthesize dataForTable = _dataForTable;
+@synthesize numberOfOptions = _numberOfOptions;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (void)setChoice:(int)choice forOption:(int)option {
+    NSLog(@"Option=%d Choice=%d selected.", option, choice);
+    [[self.dataForTable objectAtIndex:option] setObject:[NSString stringWithFormat:@"%d", choice] forKey:@"OptionValueIndex"];
+    [self validateChoices];
 }
 
-- (NSString *)displayOptionValue:(int)row {
-    NSString *optionValueDisplay = @"";
-    NSString *optionValue = [[self.dataForTable objectAtIndex:row] objectForKey:@"OptionValue"];
-    
-    switch (row) {
+- (void)validateChoices {
+    NSArray *validChoices;
+    NSString *temp = @"Valid Choices for Option";
+    for (int i = 0; i < self.numberOfOptions; i++) {
+        int j = 0;
+        validChoices = [self getValidChoicesForOption:i];
+        if (j == 0) temp = [NSString stringWithFormat:@"Valid Choices for Option%d=", i];
+        while (j < validChoices.count) {
+            temp = [temp stringByAppendingFormat:@"%@,", [validChoices objectAtIndex:j]];
+            j++;
+        }
+        if (![validChoices containsObject:[[self.dataForTable objectAtIndex:i] objectForKey:@"OptionValueIndex"]]) {
+            NSLog(@"Defaulted. Their choice was=%d", [[[self.dataForTable objectAtIndex:i] objectForKey:@"OptionValueIndex"] intValue]);
+            [[self.dataForTable objectAtIndex:i] setObject:[validChoices objectAtIndex:0] forKey:@"OptionValueIndex"];
+        }
+        NSLog(@"%@", temp);
+    }
+    [self.tableView reloadData];
+}
+
+- (NSArray *)getValidChoicesForOption:(int)option {
+    NSMutableArray *validChoices = [[NSMutableArray alloc] init];
+    //BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
+    int optionValuesLengthForOption = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] count];
+    switch (option) {
+        case 0: // For Number of Players
+            for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
+            break;
+        case 1: // For Number of Points Per Hand
+            switch ([[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Players
+                case 2: // 4 Players
+                case 3: // 5 Players
+                case 4: // 6 Players
+                    //if (teamPlay) {
+                        [validChoices addObject:@"2"]; // 10 Point
+                        [validChoices addObject:@"3"]; // 13 Point
+                        [validChoices addObject:@"4"]; // 14 Point
+                    //    break;
+                    //}
+                case 0: // 2 Players
+                case 1: // 3 Players
+                    [validChoices addObject:@"0"]; // 4 Point
+                    [validChoices addObject:@"1"]; // 5 Point
+                    break;
+                //case 3: // 5 Players
+                //    for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
+                //    break;
+            }
+            break;
+        case 2: // For Number of Points Per Game
+            switch ([[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Points Per Hand
+                case 0: // 4 Point
+                case 1: // 5 Point
+                    [validChoices addObject:@"0"]; // 11 Points
+                    [validChoices addObject:@"1"]; // 15 Points
+                    [validChoices addObject:@"2"]; // 21 Points
+                    break;
+                case 2: // 10 Point
+                case 3: // 13 Point
+                case 4: // 14 Point
+                    [validChoices addObject:@"3"]; // 52 Points
+                    [validChoices addObject:@"4"]; // 104 Points
+                    break;
+            }
+            break;
+        case 3: // For Team Play
+            switch ([[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Players
+                case 2: // 4 Players
+                case 4: // 6 Players
+                    [validChoices addObject:@"0"]; // Yes
+                case 0: // 2 Players
+                case 1: // 3 Players
+                case 3: // 5 Players
+                    [validChoices addObject:@"1"]; // No
+                    break;
+            }
+            
+    }
+    return [[NSArray alloc] initWithArray:validChoices];
+}
+
+- (NSString *)displaySelectedValueForOption:(int)option {
+    int optionValueIndex = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValueIndex"] intValue];
+    return [self displayValueNumber:optionValueIndex forOption:option];
+}
+
+- (NSString *)displayValueNumber:(int)valueNum forOption:(int)option {
+    NSString *optionValueDisplay;
+    NSString *optionValue = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] objectAtIndex:valueNum];
+    switch (option) {
         case 0:
             optionValueDisplay = [NSString stringWithFormat:@"%@ Players", optionValue];
             break;
@@ -50,10 +135,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
     if ([segue.identifier isEqualToString:@"showPitch"]) {
         PitchViewController *vc = [segue destinationViewController];
-        vc.numberOfPlayers = [[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValue"] intValue];
-        vc.numberOfPointsPerHand = [[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValue"] intValue];
+        vc.numberOfPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]] intValue];
+        vc.numberOfPointsPerHand = [[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"] intValue]] intValue];
         switch (vc.numberOfPointsPerHand) {
             case 4:
             case 5:
@@ -67,7 +153,16 @@
                 vc.minimumBid = 5;
                 break;
         }
-        vc.teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValue"] isEqualToString:@"Yes"] ? YES : NO;
+        vc.teamPlay = [[[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] intValue]] isEqualToString:@"Yes"] ? YES : NO;
+    } else if([segue.identifier isEqualToString:@"show1RowOptionChoices"] || [segue.identifier isEqualToString:@"show2RowOptionChoices"]) {
+        GameSetupOptionsTableViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+        vc.optionSelected = path.row;
+        vc.title = [[self.dataForTable objectAtIndex:path.row] objectForKey:@"OptionTitle"];
+        if ([segue.identifier isEqualToString:@"show2RowOptionChoices"]) vc.title = [vc.title stringByAppendingFormat:@" %@", [[self.dataForTable objectAtIndex:path.row] objectForKey:@"OptionSubtitle"]];
+        vc.choices = [[NSMutableArray alloc] init];
+        vc.validChoices = [self getValidChoicesForOption:path.row];
+        for (int i = 0; i < [[[self.dataForTable objectAtIndex:path.row] objectForKey:@"OptionValues"] count]; i++) [vc.choices addObject:[self displayValueNumber:i forOption:path.row]];
     }
 }
 
@@ -76,31 +171,36 @@
     [super viewDidLoad];
     
     // Init Options for Pitch
+    self.numberOfOptions = 4;
     self.title = @"Pitch Setup";
     self.dataForTable = [[NSMutableArray alloc] init];
-    for (int row = 0; row < 4; row++) {
+    for (int row = 0; row < self.numberOfOptions; row++) {
         [self.dataForTable addObject:[[NSMutableDictionary alloc] init]];
         switch (row) {
             case 0:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Players" forKey:@"OptionTitle"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"4" forKey:@"OptionValue"];
+                [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"2", @"3", @"4", @"5", @"6", nil] forKey:@"OptionValues"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"2" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup1RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
             case 1:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Points" forKey:@"OptionTitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"Per Hand" forKey:@"OptionSubtitle"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"13" forKey:@"OptionValue"];
+                [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"4", @"5", @"10", @"13", @"14", nil] forKey:@"OptionValues"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"3" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup2RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
             case 2:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Points" forKey:@"OptionTitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"Per Game" forKey:@"OptionSubtitle"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"104" forKey:@"OptionValue"];
+                [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"11", @"15", @"21", @"52", @"104", nil] forKey:@"OptionValues"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"4" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup2RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
             case 3:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Teams?" forKey:@"OptionTitle"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"Yes" forKey:@"OptionValue"];
+                [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"Yes", @"No", nil] forKey:@"OptionValues"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"0" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup1RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
         }
@@ -113,19 +213,17 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
+// #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -163,21 +261,49 @@
     id cell = [tableView dequeueReusableCellWithIdentifier:@"gameSetupStartButtonTableCell"];
     if (indexPath.section == 0) {
         NSString *CellIdentifier = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"CellIdentifier"];
+        NSArray *validChoices = [self getValidChoicesForOption:indexPath.row];
         if ([CellIdentifier isEqualToString:@"gameSetup1RowOptionTableCell"]) {
             GameSetup1RowOptionTableViewCell *oneRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             oneRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
-            oneRowOptionCell.optionValue.text = [self displayOptionValue:indexPath.row];
+            oneRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
+            if (validChoices.count < 2) {
+                [oneRowOptionCell setUserInteractionEnabled:NO];
+                oneRowOptionCell.optionValue.textColor = [UIColor grayColor];
+                oneRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                [oneRowOptionCell setUserInteractionEnabled:YES];
+                oneRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
+                oneRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
             cell = oneRowOptionCell;
         } else if ([CellIdentifier isEqualToString:@"gameSetup2RowOptionTableCell"]) {
             GameSetup2RowOptionTableViewCell *twoRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             twoRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
             twoRowOptionCell.optionSubtitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionSubtitle"];
-            twoRowOptionCell.optionValue.text = [self displayOptionValue:indexPath.row];
+            twoRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
+            if (validChoices.count < 2) {
+                [twoRowOptionCell setUserInteractionEnabled:NO];
+                twoRowOptionCell.optionValue.textColor = [UIColor grayColor];
+                twoRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                [twoRowOptionCell setUserInteractionEnabled:YES];
+                twoRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
+                twoRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
             cell = twoRowOptionCell;
         }
     }
-    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
 }
 
 /*
@@ -219,17 +345,15 @@
 }
 */
 
-#pragma mark - Table view delegate
+// #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 @end
