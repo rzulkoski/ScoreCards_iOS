@@ -33,6 +33,7 @@
 
 @synthesize pitchHandsTableView = _pitchHandsTableView;
 @synthesize numberOfPlayers = _numberOfPlayers;
+@synthesize teamNames = _teamNames;
 @synthesize numberOfPointsPerHand = _numberOfPointsPerHand;
 @synthesize numberOfPointsPerGame = _numberOfPointsPerGame;
 @synthesize teamPlay = _teamPlay;
@@ -358,7 +359,6 @@
 }
 
 - (void)startNewGame {
-    self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     self.pointStepper.maximumValue = self.numberOfPointsPerHand;
     if (!self.hands) self.hands = [[NSMutableArray alloc] init];
     else [self.hands removeAllObjects];
@@ -384,7 +384,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     [self startNewGame];
+    for (int i = 0; i < self.numberOfTeams; i++) {
+        [self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
+        [self.biddingTeamControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
+    }
     [self.suitControl setImage:[UIImage imageNamed:@"spade.png"] forSegmentAtIndex:0];
     [self.suitControl setImage:[UIImage imageNamed:@"diamond.png"] forSegmentAtIndex:1];
     [self.suitControl setImage:[UIImage imageNamed:@"club.png"] forSegmentAtIndex:2];

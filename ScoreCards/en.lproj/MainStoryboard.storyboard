@@ -250,8 +250,29 @@
                                     <segue destination="3uO-WE-i3D" kind="push" identifier="show2RowOptionChoices" id="4Fu-vg-Ekz"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamNameCell" id="Ep5-zL-zWP" customClass="GameSetupTeamNameTableViewCell">
+                                <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="267" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="EBr-hx-T1X">
+                                            <rect key="frame" x="14" y="10" width="249" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="teamName" destination="EBr-hx-T1X" id="46z-Yq-NPa"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gameSetupStartButtonTableCell" id="iIN-wM-Vdc">
-                                <rect key="frame" x="0.0" y="135" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="179" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
@@ -660,6 +681,12 @@
         </class>
         <class className="GameSetupTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetupTableViewController.h"/>
+        </class>
+        <class className="GameSetupTeamNameTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetupTeamNameTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="teamName" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="PitchHandTableViewCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchHandTableViewCell.h"/>

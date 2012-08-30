@@ -10,6 +10,7 @@
 #import "GameSetupOptionsTableViewController.h"
 #import "GameSetup1RowOptionTableViewCell.h"
 #import "GameSetup2RowOptionTableViewCell.h"
+#import "GameSetupTeamNameTableViewCell.h"
 #import "PitchViewController.h"
 
 @interface GameSetupTableViewController ()
@@ -141,6 +142,7 @@
     if ([segue.identifier isEqualToString:@"showPitch"]) {
         PitchViewController *vc = [segue destinationViewController];
         vc.numberOfPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]] intValue];
+        vc.teamNames = [[self.dataForTable objectAtIndex:0] objectForKey:@"TeamNames"];
         vc.numberOfPointsPerHand = [[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"] intValue]] intValue];
         vc.numberOfPointsPerGame = [[[[self. dataForTable objectAtIndex:2] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:2] objectForKey:@"OptionValueIndex"] intValue]] intValue];
         switch (vc.numberOfPointsPerHand) {
@@ -169,8 +171,7 @@
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Init Options for Pitch
@@ -183,6 +184,7 @@
             case 0:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Players" forKey:@"OptionTitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"2", @"3", @"4", @"5", @"6", nil] forKey:@"OptionValues"];
+                [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"Team 1", @"Team 2", @"Team 3", @"Team 4", @"Team 5", @"Team 6", nil] forKey:@"TeamNames"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"2" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup1RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
@@ -228,25 +230,33 @@
 
 // #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // #warning Incomplete method implementation.
     // Return the number of rows in the section.
     int numRows = 0;
     switch (section) {
-        case 0:
+        case 0: {
             numRows = self.dataForTable.count;
-            break;
-        case 1:
+            
+        }
+        break;
+        case 1: {
+            int numPlayersIndex = [[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue];
+            int numPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:numPlayersIndex] intValue];
+            BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
+            numRows = teamPlay ? numPlayers / 2 : numPlayers;
+        }
+        break;
+        case 2: {
             numRows = 1;
-            break;
+        }
+        break;
     }
     return numRows;
 }
@@ -259,42 +269,55 @@
     return title;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    id cell = [tableView dequeueReusableCellWithIdentifier:@"gameSetupStartButtonTableCell"];
-    if (indexPath.section == 0) {
-        NSString *CellIdentifier = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"CellIdentifier"];
-        NSArray *validChoices = [self getValidChoicesForOption:indexPath.row];
-        if ([CellIdentifier isEqualToString:@"gameSetup1RowOptionTableCell"]) {
-            GameSetup1RowOptionTableViewCell *oneRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            oneRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
-            oneRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
-            if (validChoices.count < 2) {
-                [oneRowOptionCell setUserInteractionEnabled:NO];
-                oneRowOptionCell.optionValue.textColor = [UIColor grayColor];
-                oneRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
-            } else {
-                [oneRowOptionCell setUserInteractionEnabled:YES];
-                oneRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
-                oneRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = nil;
+    NSString *CellIdentifier = nil;
+    switch (indexPath.section) {
+        case 0: {
+            CellIdentifier = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"CellIdentifier"];
+            NSArray *validChoices = [self getValidChoicesForOption:indexPath.row];
+            if ([CellIdentifier isEqualToString:@"gameSetup1RowOptionTableCell"]) {
+                GameSetup1RowOptionTableViewCell *oneRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                oneRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
+                oneRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
+                if (validChoices.count < 2) {
+                    [oneRowOptionCell setUserInteractionEnabled:NO];
+                    oneRowOptionCell.optionValue.textColor = [UIColor grayColor];
+                    oneRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
+                } else {
+                    [oneRowOptionCell setUserInteractionEnabled:YES];
+                    oneRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
+                    oneRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                }
+                cell = oneRowOptionCell;
+            } else if ([CellIdentifier isEqualToString:@"gameSetup2RowOptionTableCell"]) {
+                GameSetup2RowOptionTableViewCell *twoRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                twoRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
+                twoRowOptionCell.optionSubtitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionSubtitle"];
+                twoRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
+                if (validChoices.count < 2) {
+                    [twoRowOptionCell setUserInteractionEnabled:NO];
+                    twoRowOptionCell.optionValue.textColor = [UIColor grayColor];
+                    twoRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
+                } else {
+                    [twoRowOptionCell setUserInteractionEnabled:YES];
+                    twoRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
+                    twoRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                }
+                cell = twoRowOptionCell;
             }
-            cell = oneRowOptionCell;
-        } else if ([CellIdentifier isEqualToString:@"gameSetup2RowOptionTableCell"]) {
-            GameSetup2RowOptionTableViewCell *twoRowOptionCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-            twoRowOptionCell.optionTitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionTitle"];
-            twoRowOptionCell.optionSubtitle.text = [[self.dataForTable objectAtIndex:indexPath.row] objectForKey:@"OptionSubtitle"];
-            twoRowOptionCell.optionValue.text = [self displaySelectedValueForOption:indexPath.row];
-            if (validChoices.count < 2) {
-                [twoRowOptionCell setUserInteractionEnabled:NO];
-                twoRowOptionCell.optionValue.textColor = [UIColor grayColor];
-                twoRowOptionCell.accessoryType = UITableViewCellAccessoryNone;
-            } else {
-                [twoRowOptionCell setUserInteractionEnabled:YES];
-                twoRowOptionCell.optionValue.textColor = [[UIColor alloc] initWithRed:0.0 green:(128.0/255.0) blue:1.0 alpha:1.0];
-                twoRowOptionCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            cell = twoRowOptionCell;
         }
+        break;
+        case 1: {
+            GameSetupTeamNameTableViewCell *teamNameCell = [tableView dequeueReusableCellWithIdentifier:@"teamNameCell"];
+            teamNameCell.teamName.text = [[[self.dataForTable objectAtIndex:0] objectForKey:@"TeamNames"] objectAtIndex:indexPath.row];
+            cell = teamNameCell;
+        }
+        break;
+        case 2: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"gameSetupStartButtonTableCell"];
+        }
+        break;
     }
     return cell;
 }

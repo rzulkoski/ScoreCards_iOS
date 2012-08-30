@@ -12,6 +12,7 @@
 		94145B7715EFCF40008970BE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 94145B7615EFCF40008970BE /* Default.png */; };
 		94145B7915EFCF47008970BE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94145B7815EFCF47008970BE /* Default@2x.png */; };
 		94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94145B8015F00E19008970BE /* SplashScreenViewController.m */; };
+		94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */; };
 		941D362015EEACA3009F15BB /* ScoreCardsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */; };
 		9437C35415EECD8F00F95535 /* GameSetupOptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9437C35315EECD8F00F95535 /* GameSetupOptionsTableViewController.m */; };
 		9440409615EDAEFF0039F542 /* diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409415EDAEFF0039F542 /* diamond.png */; };
@@ -47,6 +48,8 @@
 		94145B7815EFCF47008970BE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		94145B7F15F00E19008970BE /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreenViewController.h; sourceTree = "<group>"; };
 		94145B8015F00E19008970BE /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreenViewController.m; sourceTree = "<group>"; };
+		94145B8215F01E12008970BE /* GameSetupTeamNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupTeamNameTableViewCell.h; sourceTree = "<group>"; };
+		94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetupTeamNameTableViewCell.m; sourceTree = "<group>"; };
 		941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsNavigationViewController.h; sourceTree = "<group>"; };
 		941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsNavigationViewController.m; sourceTree = "<group>"; };
 		9437C35215EECD8F00F95535 /* GameSetupOptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionsTableViewController.h; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				94B1AAB515EE88050057B93D /* GameSetup1RowOptionTableViewCell.m */,
 				94A1476315EEA0580061E44F /* GameSetup2RowOptionTableViewCell.h */,
 				94A1476415EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m */,
+				94145B8215F01E12008970BE /* GameSetupTeamNameTableViewCell.h */,
+				94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */,
 				946A10DB15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.h */,
 				946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */,
 			);
@@ -333,6 +338,7 @@
 				9437C35415EECD8F00F95535 /* GameSetupOptionsTableViewController.m in Sources */,
 				946A10DD15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m in Sources */,
 				94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */,
+				94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
