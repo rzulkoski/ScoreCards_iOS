@@ -100,6 +100,8 @@
                 case 2: // 4 Players
                 case 4: // 6 Players
                     [validChoices addObject:@"0"]; // Yes
+                    // If playing 10/13/14 Point with 4/6 Players, force TeamPlay to Yes.
+                    if ([[[NSArray alloc] initWithObjects:@"2", @"3", @"4", nil] containsObject:[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"]]) break;
                 case 0: // 2 Players
                 case 1: // 3 Players
                 case 3: // 5 Players

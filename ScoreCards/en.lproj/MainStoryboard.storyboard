@@ -346,8 +346,8 @@
                                     <action selector="pointTargetSelected:" destination="NIv-hR-2w7" eventType="valueChanged" id="JEy-x4-AU4"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3DO-Yn-gDW">
-                                <rect key="frame" x="20" y="270" width="53" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points scored:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3DO-Yn-gDW">
+                                <rect key="frame" x="20" y="270" width="119" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -595,6 +595,7 @@
                         <outlet property="pitchHandsTableView" destination="kWn-cv-CfR" id="HW5-Ku-4iA"/>
                         <outlet property="pointStepper" destination="GbO-8Y-MTV" id="kOq-o7-w4D"/>
                         <outlet property="pointStepperDisplay" destination="fUI-hy-5lN" id="OaM-EL-hSD"/>
+                        <outlet property="pointStepperLabel" destination="3DO-Yn-gDW" id="6lM-gk-xby"/>
                         <outlet property="pointTargetControl" destination="1Mr-qO-O8v" id="qN1-NG-2Lo"/>
                         <outlet property="removeHandButton" destination="cmY-Fk-4Ic" id="rmb-YM-uMb"/>
                         <outlet property="suitControl" destination="kcp-qd-Sbl" id="68z-q1-q5h"/>
@@ -692,6 +693,7 @@
                 <relationship kind="outlet" name="pitchHandsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="pointStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="pointStepperDisplay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pointStepperLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointTargetControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="removeHandButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="suitControl" candidateClass="UISegmentedControl"/>

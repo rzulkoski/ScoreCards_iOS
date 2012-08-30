@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pointTargetControl;
 @property (strong, nonatomic) IBOutlet UIStepper *pointStepper;
 @property (strong, nonatomic) IBOutlet UILabel *pointStepperDisplay;
+@property (strong, nonatomic) IBOutlet UILabel *pointStepperLabel;
 @property (weak, nonatomic) IBOutlet UILabel *biddingTeamControlLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *biddingTeamControl;
 @property (weak, nonatomic) IBOutlet UILabel *suitControlLabel;
@@ -38,6 +39,7 @@
 @synthesize pointTargetControl = _pointTargetControl;
 @synthesize pointStepper = _pointStepper;
 @synthesize pointStepperDisplay = _pointStepperDisplay;
+@synthesize pointStepperLabel = _pointStepperLabel;
 @synthesize biddingTeamControlLabel = _biddingTeamControlLabel;
 @synthesize biddingTeamControl = _biddingTeamControl;
 @synthesize suitControlLabel = _suitControlLabel;
@@ -334,6 +336,7 @@
     self.removeHandButton.hidden = NO;
     self.removeHandButton.alpha = self.hands.count > 1 ? 1.0 : 0.5;
     self.removeHandButton.enabled = self.hands.count > 1 ? YES : NO;
+    self.pointStepperLabel.text = @"Points scored:";
     self.biddingTeamControlLabel.hidden = YES;
     self.biddingTeamControl.hidden = YES;
     self.suitControlLabel.hidden = YES;
@@ -347,10 +350,12 @@
     self.biddingTeamControl.hidden = NO;
     self.suitControlLabel.hidden = NO;
     self.suitControl.hidden = NO;
-    self.pointStepper.minimumValue = self.minimumBid; // SHOULDNT BE HERE
-    self.pointStepper.value = self.currentBid;        // SHOULDNT BE HERE
+    self.pointStepperLabel.text = @"Bid:";
+    self.pointStepper.minimumValue = self.minimumBid;
+    self.pointStepper.maximumValue = self.numberOfPointsPerHand;
+    self.pointStepper.value = self.currentBid;
     [self updatePointStepperDisplay];
-} // NEEDS SOME REMOVAL WITHIN
+}
 
 - (void)startNewGame {
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
@@ -400,6 +405,7 @@
     [self setSuitControlLabel:nil];
     [self setBiddingTeamControlLabel:nil];
     [self setRemoveHandButton:nil];
+    [self setPointStepperLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
