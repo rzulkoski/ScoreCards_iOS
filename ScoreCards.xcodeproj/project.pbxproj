@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94145B7315EFC7DD008970BE /* ZLogo_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 94145B7215EFC7DD008970BE /* ZLogo_57.png */; };
+		94145B7515EFC7E3008970BE /* ZLogo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 94145B7415EFC7E2008970BE /* ZLogo_114.png */; };
 		941D362015EEACA3009F15BB /* ScoreCardsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */; };
 		9437C35415EECD8F00F95535 /* GameSetupOptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9437C35315EECD8F00F95535 /* GameSetupOptionsTableViewController.m */; };
 		9440409615EDAEFF0039F542 /* diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = 9440409415EDAEFF0039F542 /* diamond.png */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94145B7215EFC7DD008970BE /* ZLogo_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ZLogo_57.png; path = ../ZLogo_57.png; sourceTree = "<group>"; };
+		94145B7415EFC7E2008970BE /* ZLogo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ZLogo_114.png; path = ../ZLogo_114.png; sourceTree = "<group>"; };
 		941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsNavigationViewController.h; sourceTree = "<group>"; };
 		941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsNavigationViewController.m; sourceTree = "<group>"; };
 		9437C35215EECD8F00F95535 /* GameSetupOptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionsTableViewController.h; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94145B7115EFC77F008970BE /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				94145B7415EFC7E2008970BE /* ZLogo_114.png */,
+				94145B7215EFC7DD008970BE /* ZLogo_57.png */,
+			);
+			name = "App Icons";
+			sourceTree = "<group>";
+		};
 		9440409E15EDB5C50039F542 /* CardSuitImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +159,7 @@
 		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
 			isa = PBXGroup;
 			children = (
+				94145B7115EFC77F008970BE /* App Icons */,
 				9440409E15EDB5C50039F542 /* CardSuitImages */,
 				944040AB15EDC55D0039F542 /* TeamNumberImages */,
 				94B1AAB815EE880F0057B93D /* GameSetup */,
@@ -266,6 +280,8 @@
 				944040A815EDC5540039F542 /* team4.png in Resources */,
 				944040A915EDC5540039F542 /* team5.png in Resources */,
 				944040AA15EDC5540039F542 /* team6.png in Resources */,
+				94145B7315EFC7DD008970BE /* ZLogo_57.png in Resources */,
+				94145B7515EFC7E3008970BE /* ZLogo_114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
