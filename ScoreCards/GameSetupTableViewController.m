@@ -263,8 +263,13 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *title = @"";
-    if (section == 0) {
-        title = @"Set the game rules.";
+    switch (section) {
+        case 0:
+            title = @"Set the game rules.";
+            break;
+        case 1:
+            title = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? @"Edit team names." : @"Edit player names.";
+            break;
     }
     return title;
 }
