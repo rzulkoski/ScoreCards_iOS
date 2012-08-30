@@ -140,6 +140,7 @@
         PitchViewController *vc = [segue destinationViewController];
         vc.numberOfPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]] intValue];
         vc.numberOfPointsPerHand = [[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"] intValue]] intValue];
+        vc.numberOfPointsPerGame = [[[[self. dataForTable objectAtIndex:2] objectForKey:@"OptionValues"] objectAtIndex:[[[self.dataForTable objectAtIndex:2] objectForKey:@"OptionValueIndex"] intValue]] intValue];
         switch (vc.numberOfPointsPerHand) {
             case 4:
             case 5:

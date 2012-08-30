@@ -23,6 +23,7 @@
 @property (nonatomic) int numberOfTeams;
 @property (nonatomic) int biddingTeam;
 @property (nonatomic) int currentBid;
+@property (nonatomic) int currentAlert;
  
 @end
 
@@ -31,6 +32,7 @@
 @synthesize pitchHandsTableView = _pitchHandsTableView;
 @synthesize numberOfPlayers = _numberOfPlayers;
 @synthesize numberOfPointsPerHand = _numberOfPointsPerHand;
+@synthesize numberOfPointsPerGame = _numberOfPointsPerGame;
 @synthesize teamPlay = _teamPlay;
 @synthesize pointTargetControl = _pointTargetControl;
 @synthesize pointStepper = _pointStepper;
@@ -46,6 +48,7 @@
 @synthesize biddingTeam = _biddingTeam;
 @synthesize minimumBid = _minimumBid;
 @synthesize currentBid = _currentBid;
+@synthesize currentAlert = _currentAlert;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == sender.numberOfSegments-1) {
@@ -68,10 +71,39 @@
 }
 
 - (IBAction)nextHandPressed {
-    [self addHand];
-    [self.pitchHandsTableView reloadData];
-    [self.pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.hands.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-}  // NEED TO CHECK RELATION TO ADDHAND
+    if ([self.nextHandButton.currentTitle isEqualToString:@"Next Hand"]) { // Button is next hand
+        [self addHand];
+        [self.pitchHandsTableView reloadData];
+        [self.pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.hands.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else { // Button is end game
+        UIAlertView *endGameAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to end the current game?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"End Game", nil];
+        self.currentAlert = 0;
+        [endGameAlert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        if (self.currentAlert == 1) [self.navigationController popViewControllerAnimated:YES];
+    } else if (buttonIndex == 1) {
+        [self showGameOver];
+    }
+}
+
+- (void)showGameOver {
+    int highestScore = 0;
+    int winningTeam = -1;
+    for (int i = 1; i <= self.numberOfTeams; i++) {
+        int currentTeamScore = [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScore", i]] intValue];
+        if (currentTeamScore > highestScore) {
+            winningTeam = i;
+            highestScore = currentTeamScore;
+        }
+    }
+    UIAlertView *gameOverAlert = [[UIAlertView alloc] initWithTitle:@"Game Over" message:[NSString stringWithFormat:@"Team %d Wins!!!", winningTeam] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    self.currentAlert = 1;
+    [gameOverAlert show];
+}
 
 - (IBAction)removeHandPressed {
     UIActionSheet *removeLastHandConfirmation = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to remove the current hand? This action cannot be undone." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Hand" otherButtonTitles:nil];
@@ -93,12 +125,17 @@
 
 - (IBAction)pointsChanged {
     [self updatePointStepperDisplay];
-    if (self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) {
+    if (self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) { // If bidding not selected
         [self updateCurrentRow];
         [self adjustMaxPointsIfNeeded];
         [self showTeamControls]; 
-    } else {
+    } else {  // Bidding control is selected
         if (self.biddingTeamControl.selectedSegmentIndex >= 0 && self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
+        NSLog(@"Points changed with bid control selected.");
+        if([self pointsScoredSoFar] > 0) {
+            NSLog(@"Points have been scored so far.");
+            for (int i = 1; i <= self.numberOfTeams; i++) [self handleScoringForTeam:i];
+        }
     }
 }
 
@@ -116,16 +153,37 @@
 - (void)updateCurrentRow {
     self.pointTargetControl.enabled = YES;
     
-    if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments - 1){
+    if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments - 1){ // If bidding control selected
         self.currentBid = (int)self.pointStepper.value;
         [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:self.currentBid >= 10 ? @"%d       " : @"%d     ", self.currentBid] forKey:@"Bid"];
-    } else {
-        for (int i = 1; i <= self.numberOfTeams; i++) {
-            [self handleScoringForTeam:i];
-        }
-        
+    } else { // If team control selected
+        for (int i = 1; i <= self.numberOfTeams; i++) [self handleScoringForTeam:i];
+        [self checkIfGameOver];
     }
     [self.pitchHandsTableView reloadData];
+}
+
+- (void)checkIfGameOver {
+    BOOL gameIsOver = NO;
+    for (int i = 1; i <= self.numberOfTeams; i++) {
+        if ([[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dScore", i]] intValue] >= self.numberOfPointsPerGame) gameIsOver = YES;
+    }
+    [self setNextHandButtonToGameOver:gameIsOver ? YES : NO];
+}
+
+- (void)setNextHandButtonToGameOver:(BOOL)gameIsOver {
+    NSLog(@"Made it to setGameOver function! %@", gameIsOver ? @"GAME OVER!!!" : @"Game is not over.");
+    if (gameIsOver) {
+        [self.nextHandButton setTitle:@"End Game" forState:UIControlStateNormal];
+        [self.nextHandButton setTitle:@"End Game" forState:UIControlStateHighlighted];
+        [self.nextHandButton setTitle:@"End Game" forState:UIControlStateDisabled];
+        [self.nextHandButton setTitle:@"End Game" forState:UIControlStateSelected];
+    } else {
+        [self.nextHandButton setTitle:@"Next Hand" forState:UIControlStateNormal];
+        [self.nextHandButton setTitle:@"Next Hand" forState:UIControlStateHighlighted];
+        [self.nextHandButton setTitle:@"Next Hand" forState:UIControlStateDisabled];
+        [self.nextHandButton setTitle:@"Next Hand" forState:UIControlStateSelected];
+    }
 }
 
 - (void)handleScoringForTeam:(int)team {
@@ -138,35 +196,53 @@
     int previousScore = self.hands.count > 1 ? [[[self.hands objectAtIndex:self.hands.count-2] objectForKey:teamScore] intValue] : 0;
     NSString *currentScoreChange = [[self.hands objectAtIndex:currentHand] objectForKey:teamScoreChange];
     NSString *prevScorePlusCurScore = [NSString stringWithFormat:@"%d", previousScore + currentValue];
+    NSString *prevScorePlusPointsTaken = [NSString stringWithFormat:@"%d", previousScore + [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue]];
     NSString *prevScoreMinusBid = [NSString stringWithFormat:@"%d", previousScore - self.currentBid];
     NSString *prevScorePlusInvCurScore = [NSString stringWithFormat:@"%d", previousScore + self.numberOfPointsPerHand - currentValue];
     NSString *curValue = [NSString stringWithFormat:@"%d", currentValue];
     NSString *curValuePlus = [NSString stringWithFormat:@"+%d", currentValue];
+    NSString *pointsTakenPlus = [NSString stringWithFormat:@"+%d", [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue]];
     NSString *minusCurBid = [NSString stringWithFormat:@"%d", 0 - self.currentBid];
     NSString *invCurValue = [NSString stringWithFormat:@"%d", self.numberOfPointsPerHand - currentValue];
     NSString *invCurValuePlus = [NSString stringWithFormat:@"+%d", self.numberOfPointsPerHand - currentValue];
     
-    if (team == selectedTeam) {
+    if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments-1) { // If bidding control selected
+        NSLog(@"Made it to handle score while bidding for Team%d, biddingTeam?=%@, currentBid=%d, pointsTaken=%d", team, team == self.biddingTeam ? @"YES" : @"NO", self.currentBid, [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue]);
         if (team == self.biddingTeam) {
-            [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? prevScorePlusCurScore : prevScoreMinusBid forKey:teamScore];
-            [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? curValuePlus : minusCurBid forKey:teamScoreChange];
-        } else {
-            [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusCurScore forKey:teamScore];
-            [[self.hands objectAtIndex:currentHand] setObject:curValuePlus forKey:teamScoreChange];
+            if ([[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue] < self.currentBid) { // If team went set
+                NSLog(@"Team%d is now set!", team);
+                [[self.hands objectAtIndex:currentHand] setObject:prevScoreMinusBid forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:minusCurBid forKey:teamScoreChange];
+            } else {
+                NSLog(@"Team%d is NOT set.", team);
+                [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusPointsTaken forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:pointsTakenPlus forKey:teamScoreChange];
+            }
         }
-        [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
-    } else if (self.numberOfTeams == 2) {
-        if (team == self.biddingTeam) {
-            [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? prevScorePlusInvCurScore : prevScoreMinusBid forKey:teamScore];
-            [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? invCurValuePlus : minusCurBid forKey:teamScoreChange];
+    }
+    else { // If team control selected
+        if (team == selectedTeam) {
+            if (team == self.biddingTeam) {
+                [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? prevScorePlusCurScore : prevScoreMinusBid forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? curValuePlus : minusCurBid forKey:teamScoreChange];
+            } else {
+                [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusCurScore forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:curValuePlus forKey:teamScoreChange];
+            }
+            [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
+        } else if (self.numberOfTeams == 2) {
+            if (team == self.biddingTeam) {
+                [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? prevScorePlusInvCurScore : prevScoreMinusBid forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? invCurValuePlus : minusCurBid forKey:teamScoreChange];
+            } else {
+                [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusInvCurScore forKey:teamScore];
+                [[self.hands objectAtIndex:currentHand] setObject:invCurValuePlus forKey:teamScoreChange];
+            }
+            [[self.hands objectAtIndex:currentHand] setObject:invCurValue forKey:teamPointsTaken];
         } else {
-            [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusInvCurScore forKey:teamScore];
-            [[self.hands objectAtIndex:currentHand] setObject:invCurValuePlus forKey:teamScoreChange];
+            if (team == self.biddingTeam && [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue] < self.currentBid) [[self.hands objectAtIndex:currentHand] setObject:minusCurBid forKey:teamScoreChange];
+            else [[self.hands objectAtIndex:currentHand] setObject:[currentScoreChange isEqualToString:@""] ? @"+0" : currentScoreChange forKey:teamScoreChange];
         }
-        [[self.hands objectAtIndex:currentHand] setObject:invCurValue forKey:teamPointsTaken];
-    } else {
-        if (team == self.biddingTeam && [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue] < self.currentBid) [[self.hands objectAtIndex:currentHand] setObject:minusCurBid forKey:teamScoreChange];
-        else [[self.hands objectAtIndex:currentHand] setObject:[currentScoreChange isEqualToString:@""] ? @"+0" : currentScoreChange forKey:teamScoreChange];
     }
 }
 
@@ -274,6 +350,7 @@
     self.suitControl.hidden = NO;
     self.pointStepper.minimumValue = self.minimumBid; // SHOULDNT BE HERE
     self.pointStepper.value = self.currentBid;        // SHOULDNT BE HERE
+    [self updatePointStepperDisplay];
 } // NEEDS SOME REMOVAL WITHIN
 
 - (void)startNewGame {

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
+@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
 @property (nonatomic) int numberOfPlayers;
 @property (nonatomic) int numberOfPointsPerHand;
+@property (nonatomic) int numberOfPointsPerGame;
 @property (nonatomic) int minimumBid;
 @property (nonatomic) BOOL teamPlay;
 
