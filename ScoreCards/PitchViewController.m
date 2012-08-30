@@ -8,6 +8,7 @@
 
 #import "PitchViewController.h"
 #import "PitchHandTableViewCell.h"
+#import "ScoreCardsNavigationViewController.h"
 
 @interface PitchViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pointTargetControl;
@@ -84,7 +85,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        if (self.currentAlert == 1) [self.navigationController popViewControllerAnimated:YES];
+        if (self.currentAlert == 1) {
+            ScoreCardsNavigationViewController *nvc = (ScoreCardsNavigationViewController *)self.navigationController;
+            nvc.regularPop = YES;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } else if (buttonIndex == 1) {
         [self showGameOver];
     }
@@ -131,9 +136,7 @@
         [self showTeamControls]; 
     } else {  // Bidding control is selected
         if (self.biddingTeamControl.selectedSegmentIndex >= 0 && self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
-        NSLog(@"Points changed with bid control selected.");
         if([self pointsScoredSoFar] > 0) {
-            NSLog(@"Points have been scored so far.");
             for (int i = 1; i <= self.numberOfTeams; i++) [self handleScoringForTeam:i];
         }
     }
@@ -172,7 +175,6 @@
 }
 
 - (void)setNextHandButtonToGameOver:(BOOL)gameIsOver {
-    NSLog(@"Made it to setGameOver function! %@", gameIsOver ? @"GAME OVER!!!" : @"Game is not over.");
     if (gameIsOver) {
         [self.nextHandButton setTitle:@"End Game" forState:UIControlStateNormal];
         [self.nextHandButton setTitle:@"End Game" forState:UIControlStateHighlighted];
@@ -207,14 +209,11 @@
     NSString *invCurValuePlus = [NSString stringWithFormat:@"+%d", self.numberOfPointsPerHand - currentValue];
     
     if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments-1) { // If bidding control selected
-        NSLog(@"Made it to handle score while bidding for Team%d, biddingTeam?=%@, currentBid=%d, pointsTaken=%d", team, team == self.biddingTeam ? @"YES" : @"NO", self.currentBid, [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue]);
         if (team == self.biddingTeam) {
             if ([[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue] < self.currentBid) { // If team went set
-                NSLog(@"Team%d is now set!", team);
                 [[self.hands objectAtIndex:currentHand] setObject:prevScoreMinusBid forKey:teamScore];
                 [[self.hands objectAtIndex:currentHand] setObject:minusCurBid forKey:teamScoreChange];
             } else {
-                NSLog(@"Team%d is NOT set.", team);
                 [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusPointsTaken forKey:teamScore];
                 [[self.hands objectAtIndex:currentHand] setObject:pointsTakenPlus forKey:teamScoreChange];
             }
