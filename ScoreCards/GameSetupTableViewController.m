@@ -54,10 +54,12 @@
 - (NSArray *)getValidChoicesForOption:(int)option {
     NSMutableArray *validChoices = [[NSMutableArray alloc] init];
     //BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
-    int optionValuesLengthForOption = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] count];
+    // TEMPORARILY DISABLED FOR FIRST BETA TEST
+    // int optionValuesLengthForOption = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] count];
     switch (option) {
         case 0: // For Number of Players
-            for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
+            [validChoices addObjectsFromArray:[[NSArray alloc] initWithObjects:@"0", @"1", @"2", @"4", nil]]; // TEMPORARY FOR FIRST BETA TEST
+            //for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
             break;
         case 1: // For Number of Points Per Hand
             switch ([[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Players
@@ -101,8 +103,10 @@
                 case 2: // 4 Players
                 case 4: // 6 Players
                     [validChoices addObject:@"0"]; // Yes
+                    break;  // TEMPORARY FOR FIRST BETA TEST
+                    // TEMPORARILY DISABLED FOR FIRST BETA TEST
                     // If playing 10/13/14 Point with 4/6 Players, force TeamPlay to Yes.
-                    if ([[[NSArray alloc] initWithObjects:@"2", @"3", @"4", nil] containsObject:[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"]]) break;
+                    //if ([[[NSArray alloc] initWithObjects:@"2", @"3", @"4", nil] containsObject:[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"]]) break;
                 case 0: // 2 Players
                 case 1: // 3 Players
                 case 3: // 5 Players
@@ -192,14 +196,14 @@
                 [[self.dataForTable objectAtIndex:row] setObject:@"Points" forKey:@"OptionTitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"Per Hand" forKey:@"OptionSubtitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"4", @"5", @"10", @"13", @"14", nil] forKey:@"OptionValues"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"3" forKey:@"OptionValueIndex"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"2" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup2RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
             case 2:
                 [[self.dataForTable objectAtIndex:row] setObject:@"Points" forKey:@"OptionTitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"Per Game" forKey:@"OptionSubtitle"];
                 [[self.dataForTable objectAtIndex:row] setObject:[[NSArray alloc] initWithObjects:@"11", @"15", @"21", @"52", @"104", nil] forKey:@"OptionValues"];
-                [[self.dataForTable objectAtIndex:row] setObject:@"4" forKey:@"OptionValueIndex"];
+                [[self.dataForTable objectAtIndex:row] setObject:@"3" forKey:@"OptionValueIndex"];
                 [[self.dataForTable objectAtIndex:row] setObject:@"gameSetup2RowOptionTableCell" forKey:@"CellIdentifier"];
                 break;
             case 3:
@@ -247,10 +251,12 @@
         }
         break;
         case 1: {
-            int numPlayersIndex = [[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue];
-            int numPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:numPlayersIndex] intValue];
-            BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
-            numRows = teamPlay ? numPlayers / 2 : numPlayers;
+            // TEMPORARILY DISABLED FOR FIRST BETA TEST
+            //int numPlayersIndex = [[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue];
+            //int numPlayers = [[[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValues"] objectAtIndex:numPlayersIndex] intValue];
+            //BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
+            //numRows = teamPlay ? numPlayers / 2 : numPlayers;
+            numRows = 0; // TEMPORARY FOR FIRST BETA TEST
         }
         break;
         case 2: {
@@ -268,7 +274,9 @@
             title = @"Set the game rules.";
             break;
         case 1:
-            title = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? @"Edit team names." : @"Edit player names.";
+            // TEMPORARILY DISABLED FOR FIRST BETA TEST
+            //title = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? @"Edit team names." : @"Edit player names.";
+            title = @""; // TEMPORARY FOR FIRST BETA TEST
             break;
     }
     return title;
