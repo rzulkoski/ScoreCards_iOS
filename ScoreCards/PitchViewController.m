@@ -232,7 +232,7 @@
                 [[self.hands objectAtIndex:currentHand] setObject:curValuePlus forKey:teamScoreChange];
             }
             [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
-        } else if (self.numberOfTeams == 2) {
+        } else if (self.numberOfTeams == 2 && self.numberOfPointsPerHand >=10) {
             if (team == self.biddingTeam) {
                 [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? prevScorePlusInvCurScore : prevScoreMinusBid forKey:teamScore];
                 [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? invCurValuePlus : minusCurBid forKey:teamScoreChange];

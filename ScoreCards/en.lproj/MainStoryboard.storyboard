@@ -138,6 +138,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ScoreCards" id="tcF-2w-1CO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="769" y="112"/>
