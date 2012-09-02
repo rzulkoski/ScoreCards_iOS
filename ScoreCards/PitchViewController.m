@@ -382,8 +382,14 @@
     return newImage;
 }
 
+- (void)betaPressed {
+    NSLog(@"BETA Pressed!");
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/index/m/7667863"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"BETA" style:UIBarButtonItemStylePlain target:self action:@selector(betaPressed)];
     if (!self.teamPlay) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     [self startNewGame];

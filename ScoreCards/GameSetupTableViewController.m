@@ -175,9 +175,14 @@
     }
 }
 
+- (void)betaPressed {
+    NSLog(@"BETA Pressed!");
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/index/m/7667863"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"BETA" style:UIBarButtonItemStylePlain target:self action:@selector(betaPressed)];
     // Init Options for Pitch
     self.numberOfOptions = 4;
     self.title = @"Pitch Setup";

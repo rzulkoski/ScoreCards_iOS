@@ -137,7 +137,7 @@
                             <outlet property="delegate" destination="6zA-Mh-sZh" id="pa4-mJ-wc9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ScoreCards" id="tcF-2w-1CO"/>
+                    <navigationItem key="navigationItem" title="ScoreCards" id="Sw3-p2-lkN"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
@@ -712,9 +712,6 @@
         <class className="PitchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
-                <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
-                <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControlLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>
