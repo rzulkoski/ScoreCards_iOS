@@ -33,6 +33,7 @@
 		947A0E9515EA734C003AEF56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9415EA734C003AEF56 /* main.m */; };
 		947A0E9915EA734C003AEF56 /* ScoreCardsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */; };
 		947A0E9C15EA734C003AEF56 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */; };
+		9494CE7C15F49D06006B4F8E /* ScoreCardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9494CE7B15F49D06006B4F8E /* ScoreCardsTableViewController.m */; };
 		94A1476515EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1476415EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m */; };
 		94B1AAB615EE88050057B93D /* GameSetup1RowOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B1AAB515EE88050057B93D /* GameSetup1RowOptionTableViewCell.m */; };
 		94C5B76515EAC19B002F518B /* PitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C5B76415EAC19B002F518B /* PitchViewController.m */; };
@@ -77,6 +78,8 @@
 		947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScoreCardsAppDelegate.h; sourceTree = "<group>"; };
 		947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsAppDelegate.m; sourceTree = "<group>"; };
 		947A0E9B15EA734C003AEF56 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		9494CE7A15F49D06006B4F8E /* ScoreCardsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsTableViewController.h; sourceTree = "<group>"; };
+		9494CE7B15F49D06006B4F8E /* ScoreCardsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsTableViewController.m; sourceTree = "<group>"; };
 		94A1476315EEA0580061E44F /* GameSetup2RowOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetup2RowOptionTableViewCell.h; sourceTree = "<group>"; };
 		94A1476415EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetup2RowOptionTableViewCell.m; sourceTree = "<group>"; };
 		94B1AAB415EE88050057B93D /* GameSetup1RowOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetup1RowOptionTableViewCell.h; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */,
 				941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */,
+				9494CE7A15F49D06006B4F8E /* ScoreCardsTableViewController.h */,
+				9494CE7B15F49D06006B4F8E /* ScoreCardsTableViewController.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -250,6 +255,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 947A0EA215EA734C003AEF56 /* Build configuration list for PBXNativeTarget "ScoreCards" */;
 			buildPhases = (
+				94C6C12915F487A6005A3BB7 /* Run Script */,
 				947A0E8015EA734C003AEF56 /* Sources */,
 				947A0E8115EA734C003AEF56 /* Frameworks */,
 				947A0E8215EA734C003AEF56 /* Resources */,
@@ -316,6 +322,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		94C6C12915F487A6005A3BB7 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Auto Increment Version Script\nbuildPlist=$INFOPLIST_FILE\necho $buildPlist\nCFSVString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$buildPlist\")\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$buildPlist\")\nBUILD_NR=${CFBundleVersion##*.}\nBUILD_NR=$(($BUILD_NR + 1))\n#echo $BUILD_NR\nCFBundleVersion=$CFSVString\".\"$BUILD_NR\n#echo $CFBundleVersion\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersion\" \"$buildPlist\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		947A0E8015EA734C003AEF56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -333,6 +356,7 @@
 				946A10DD15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m in Sources */,
 				94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */,
 				94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */,
+				9494CE7C15F49D06006B4F8E /* ScoreCardsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

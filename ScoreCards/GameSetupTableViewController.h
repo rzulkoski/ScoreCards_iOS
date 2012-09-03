@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GameSetupOptionsTableViewController.h"
 
-@interface GameSetupTableViewController : UITableViewController <GameSetupChoicesDelegate>
+@interface GameSetupTableViewController : UITableViewController <GameSetupChoicesDelegate, UIAlertViewDelegate>
 
 - (void)setChoice:(int)choice forOption:(int)option;
 

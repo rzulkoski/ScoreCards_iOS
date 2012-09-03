@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - ScoreCards-->
+        <!--Score Cards Table View Controller - ScoreCards-->
         <scene sceneID="8fE-El-Sa4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2QG-sf-evf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="6zA-Mh-sZh" sceneMemberID="viewController">
+                <tableViewController id="6zA-Mh-sZh" customClass="ScoreCardsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="cFd-M7-Hxj">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -712,6 +712,9 @@
         <class className="PitchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
+                <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="pointTargetSelected:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="suitSelected:" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="biddingTeamControlLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextHandButton" candidateClass="UIButton"/>
@@ -727,6 +730,9 @@
         </class>
         <class className="ScoreCardsNavigationViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsNavigationViewController.h"/>
+        </class>
+        <class className="ScoreCardsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsTableViewController.h"/>
         </class>
         <class className="SplashScreenViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
