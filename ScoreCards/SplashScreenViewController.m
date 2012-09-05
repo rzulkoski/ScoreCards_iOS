@@ -33,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
     if ([[UIScreen mainScreen] scale] == 1.0) [splashScreenButton setImage:[UIImage imageNamed:@"Default.png"] forState:UIControlStateNormal];
     [self performSelector:@selector(enterAppView) withObject:nil afterDelay:2];
 	// Do any additional setup after loading the view.
@@ -47,7 +49,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

@@ -77,7 +77,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	// Do any additional setup after loading the view.
 }

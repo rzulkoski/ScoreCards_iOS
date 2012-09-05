@@ -27,6 +27,7 @@
 		944040AA15EDC5540039F542 /* team6.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A415EDC5540039F542 /* team6.png */; };
 		9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93015F71007008B9F8C /* ScoreCardsViewController.m */; };
 		9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */; };
+		9444A93715F72816008B9F8C /* GameSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93615F72816008B9F8C /* GameSelectTableViewController.m */; };
 		946A10DD15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */; };
 		947A0E8915EA734C003AEF56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8815EA734C003AEF56 /* UIKit.framework */; };
 		947A0E8B15EA734C003AEF56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8A15EA734C003AEF56 /* Foundation.framework */; };
@@ -70,6 +71,8 @@
 		9444A93015F71007008B9F8C /* ScoreCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
 		9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WithScoreCardsBetaButton.h"; sourceTree = "<group>"; };
 		9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WithScoreCardsBetaButton.m"; sourceTree = "<group>"; };
+		9444A93515F72816008B9F8C /* GameSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSelectTableViewController.h; sourceTree = "<group>"; };
+		9444A93615F72816008B9F8C /* GameSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSelectTableViewController.m; sourceTree = "<group>"; };
 		945B553015EDD665003FAD05 /* ScoreCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ScoreCards.entitlements; sourceTree = "<group>"; };
 		946A10DB15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionChoicesTableViewCell.h; sourceTree = "<group>"; };
 		946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetupOptionChoicesTableViewCell.m; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				9444A93015F71007008B9F8C /* ScoreCardsViewController.m */,
 				9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */,
 				9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */,
+				9444A93515F72816008B9F8C /* GameSelectTableViewController.h */,
+				9444A93615F72816008B9F8C /* GameSelectTableViewController.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -369,6 +374,7 @@
 				9494CE7C15F49D06006B4F8E /* ScoreCardsTableViewController.m in Sources */,
 				9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */,
 				9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */,
+				9444A93715F72816008B9F8C /* GameSelectTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

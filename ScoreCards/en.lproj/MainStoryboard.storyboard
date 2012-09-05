@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Ws1-gP-GTe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="0Zv-wR-pLg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
-        <!--Score Cards Table View Controller - ScoreCards-->
+        <!--Game Select Table View Controller - ScoreCards-->
         <scene sceneID="8fE-El-Sa4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2QG-sf-evf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="6zA-Mh-sZh" customClass="ScoreCardsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="6zA-Mh-sZh" customClass="GameSelectTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="cFd-M7-Hxj">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,6 +138,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ScoreCards" id="Sw3-p2-lkN"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
@@ -161,17 +163,18 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <segue destination="0Zv-wR-pLg" kind="modal" identifier="enterApp" id="Dn5-eK-lnw"/>
+                            <segue destination="6zA-Mh-sZh" kind="push" identifier="enterApp" id="VoG-g9-OxB"/>
                         </connections>
                     </button>
                     <navigationItem key="navigationItem" id="5gh-9e-cGS"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="splashScreenButton" destination="zSm-rg-gpb" id="9lo-xU-K0n"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-112" y="112"/>
+            <point key="canvasLocation" x="357" y="112"/>
         </scene>
         <!--Game Setup Table View Controller - Game Setup-->
         <scene sceneID="6jh-P9-p8e">
@@ -645,17 +648,20 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="6zA-Mh-sZh" kind="relationship" relationship="rootViewController" id="m4G-pe-Nz9"/>
+                        <segue destination="Ws1-gP-GTe" kind="relationship" relationship="rootViewController" id="K7K-tw-igZ"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="328" y="112"/>
+            <point key="canvasLocation" x="-56" y="112"/>
         </scene>
     </scenes>
     <resources>
         <image name="Default@2x.png" width="640" height="960"/>
     </resources>
     <classes>
+        <class className="GameSelectTableViewController" superclassName="ScoreCardsTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSelectTableViewController.h"/>
+        </class>
         <class className="GameSetup1RowOptionTableViewCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetup1RowOptionTableViewCell.h"/>
             <relationships>
@@ -677,10 +683,10 @@
                 <relationship kind="outlet" name="optionChoice" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="GameSetupOptionsTableViewController" superclassName="UITableViewController">
+        <class className="GameSetupOptionsTableViewController" superclassName="ScoreCardsTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetupOptionsTableViewController.h"/>
         </class>
-        <class className="GameSetupTableViewController" superclassName="UITableViewController">
+        <class className="GameSetupTableViewController" superclassName="ScoreCardsTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GameSetupTableViewController.h"/>
         </class>
         <class className="GameSetupTeamNameTableViewCell" superclassName="UITableViewCell">
@@ -709,7 +715,7 @@
                 <relationship kind="outlet" name="team6ScoreChange" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="PitchViewController" superclassName="UIViewController">
+        <class className="PitchViewController" superclassName="ScoreCardsViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PitchViewController.h"/>
             <relationships>
                 <relationship kind="action" name="biddingTeamSelected:" candidateClass="UISegmentedControl"/>
@@ -733,6 +739,9 @@
         </class>
         <class className="ScoreCardsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsTableViewController.h"/>
+        </class>
+        <class className="ScoreCardsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoreCardsViewController.h"/>
         </class>
         <class className="SplashScreenViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
