@@ -25,6 +25,8 @@
 		944040A815EDC5540039F542 /* team4.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A215EDC5540039F542 /* team4.png */; };
 		944040A915EDC5540039F542 /* team5.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A315EDC5540039F542 /* team5.png */; };
 		944040AA15EDC5540039F542 /* team6.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A415EDC5540039F542 /* team6.png */; };
+		9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93015F71007008B9F8C /* ScoreCardsViewController.m */; };
+		9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */; };
 		946A10DD15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */; };
 		947A0E8915EA734C003AEF56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8815EA734C003AEF56 /* UIKit.framework */; };
 		947A0E8B15EA734C003AEF56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A0E8A15EA734C003AEF56 /* Foundation.framework */; };
@@ -64,6 +66,10 @@
 		944040A215EDC5540039F542 /* team4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team4.png; sourceTree = "<group>"; };
 		944040A315EDC5540039F542 /* team5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team5.png; sourceTree = "<group>"; };
 		944040A415EDC5540039F542 /* team6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team6.png; sourceTree = "<group>"; };
+		9444A92F15F71007008B9F8C /* ScoreCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsViewController.h; sourceTree = "<group>"; };
+		9444A93015F71007008B9F8C /* ScoreCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
+		9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WithScoreCardsBetaButton.h"; sourceTree = "<group>"; };
+		9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WithScoreCardsBetaButton.m"; sourceTree = "<group>"; };
 		945B553015EDD665003FAD05 /* ScoreCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ScoreCards.entitlements; sourceTree = "<group>"; };
 		946A10DB15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionChoicesTableViewCell.h; sourceTree = "<group>"; };
 		946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetupOptionChoicesTableViewCell.m; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 				941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */,
 				9494CE7A15F49D06006B4F8E /* ScoreCardsTableViewController.h */,
 				9494CE7B15F49D06006B4F8E /* ScoreCardsTableViewController.m */,
+				9444A92F15F71007008B9F8C /* ScoreCardsViewController.h */,
+				9444A93015F71007008B9F8C /* ScoreCardsViewController.m */,
+				9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */,
+				9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -357,6 +367,8 @@
 				94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */,
 				94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */,
 				9494CE7C15F49D06006B4F8E /* ScoreCardsTableViewController.m in Sources */,
+				9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */,
+				9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

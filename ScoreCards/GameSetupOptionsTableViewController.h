@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ScoreCardsTableViewController.h"
 
 @protocol GameSetupChoicesDelegate <NSObject>
 - (void)setChoice:(int)choice forOption:(int)option;
 @end
 
-@interface GameSetupOptionsTableViewController : UITableViewController
+@interface GameSetupOptionsTableViewController : ScoreCardsTableViewController
 
 @property (nonatomic, strong) id <GameSetupChoicesDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *choices;

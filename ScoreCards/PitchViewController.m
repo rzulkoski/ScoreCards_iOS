@@ -109,25 +109,6 @@
                     break;
             }
             break;
-        case 2: // Beta Pressed
-            switch (buttonIndex) {
-                case 0:
-                    NSLog(@"Cancel Pressed");
-                    break;
-                case 1:
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/scorecardsbetadownloads"]];
-                    break;
-                case 2:
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/newthread/m/7667863/id/1680082"]];
-                    break;
-                case 3:
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/newthread/m/7667863/id/1680085"]];
-                    break;
-                case 4:
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/newthread/m/7667863/id/1680086"]];
-                    break;
-            }
-            break;
     }
 }
 
@@ -415,16 +396,8 @@
     return newImage;
 }
 
-- (void)betaPressed {
-    NSLog(@"BETA Pressed!");
-    UIAlertView *betaAlert = [[UIAlertView alloc] initWithTitle:@"Choose an action:" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Check for Updates", @"Submit a Bug Report", @"Request a Feature", @"Make a Suggestion", nil];
-    self.currentAlert = 2;
-    [betaAlert show];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"BETA" style:UIBarButtonItemStylePlain target:self action:@selector(betaPressed)];
     if (!self.teamPlay) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     [self startNewGame];

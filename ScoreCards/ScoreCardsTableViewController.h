@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScoreCardsTableViewController : UITableViewController <UIAlertViewDelegate>
+@interface ScoreCardsTableViewController : UITableViewController //<UIAlertViewDelegate>
 
 @end
