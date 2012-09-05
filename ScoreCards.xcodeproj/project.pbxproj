@@ -166,6 +166,21 @@
 			name = "Team Number Images";
 			sourceTree = "<group>";
 		};
+		9444A93B15F72E13008B9F8C /* Game Select */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Game Select";
+			sourceTree = "<group>";
+		};
+		9444A93C15F72E41008B9F8C /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				94D3E5E315EBF02900D96DBE /* Pitch */,
+			);
+			name = Games;
+			sourceTree = "<group>";
+		};
 		947A0E7915EA734C003AEF56 = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +214,9 @@
 			children = (
 				94145B7115EFC77F008970BE /* App Icons */,
 				94145B7E15F00477008970BE /* Splash Screen */,
-				9440409E15EDB5C50039F542 /* Card Suit Images */,
-				944040AB15EDC55D0039F542 /* Team Number Images */,
+				9444A93B15F72E13008B9F8C /* Game Select */,
 				94B1AAB815EE880F0057B93D /* Game Setup */,
-				94D3E5E315EBF02900D96DBE /* Pitch */,
+				9444A93C15F72E41008B9F8C /* Games */,
 				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
 				941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */,
 				941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */,
@@ -222,6 +236,8 @@
 		947A0E8F15EA734C003AEF56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9440409E15EDB5C50039F542 /* Card Suit Images */,
+				944040AB15EDC55D0039F542 /* Team Number Images */,
 				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
 				947A0E9815EA734C003AEF56 /* ScoreCardsAppDelegate.m */,
 				945B553015EDD665003FAD05 /* ScoreCards.entitlements */,
