@@ -11,5 +11,6 @@
 @interface UIViewController (WithScoreCardsBetaButton) <UIAlertViewDelegate>
 
 - (void)configureScoreCardsBetaButton;
+- (void)clickedBetaButtonAtIndex:(NSInteger)buttonIndex;
 
 @end

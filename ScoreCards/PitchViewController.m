@@ -9,6 +9,13 @@
 #import "PitchViewController.h"
 #import "PitchHandTableViewCell.h"
 #import "ScoreCardsNavigationViewController.h"
+#import "UIViewController+WithScoreCardsBetaButton.h"
+#include "Globals.h"
+
+#define END_GAME_ALERT 0
+#define GAME_OVER_ALERT 1
+
+#define REMOVE_LAST_HAND_ACTIONSHEET 0
 
 @interface PitchViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pointTargetControl;
@@ -25,7 +32,6 @@
 @property (nonatomic) int numberOfTeams;
 @property (nonatomic) int biddingTeam;
 @property (nonatomic) int currentBid;
-@property (nonatomic) int currentAlert;
  
 @end
 
@@ -52,7 +58,6 @@
 @synthesize biddingTeam = _biddingTeam;
 @synthesize minimumBid = _minimumBid;
 @synthesize currentBid = _currentBid;
-@synthesize currentAlert = _currentAlert;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == sender.numberOfSegments-1) {
@@ -81,34 +86,32 @@
         [self.pitchHandsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.hands.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     } else { // Button is end game
         UIAlertView *endGameAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to end the current game?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"End Game", nil];
-        self.currentAlert = 0;
+        endGameAlert.tag = END_GAME_ALERT;
         [endGameAlert show];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (self.currentAlert) {
-        case 0: // Abandon Game
-            switch (buttonIndex) {
-                case 0:   // Cancel
-                    break;
-                case 1: { // Abandon Game
-                    ScoreCardsNavigationViewController *nvc = (ScoreCardsNavigationViewController *)self.navigationController;
-                    nvc.regularPop = YES;
-                    [self.navigationController popViewControllerAnimated:YES];
-                    break;
-                }
+    NSLog(@"Entered PVC alertView clickedButtonAtIndex");
+    if (alertView.tag == END_GAME_ALERT) {
+        switch (buttonIndex) {
+            case 0: // Cancel
+                break;
+            case 1: // End Game
+                [self showGameOver];
+                break;
+        }
+    } else if (alertView.tag == GAME_OVER_ALERT) {
+        switch (buttonIndex) {
+            case 0: { // OK
+                ScoreCardsNavigationViewController *nvc = (ScoreCardsNavigationViewController *)self.navigationController;
+                nvc.regularPop = YES;
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
             }
-            break;
-        case 1: // End Game
-            switch (buttonIndex) {
-                case 0: // Cancel
-                    break;
-                case 1: // End Game
-                    [self showGameOver];
-                    break;
-            }
-            break;
+        }
+    } else if (alertView.tag == BETA_BUTTON_ALERT) {
+        [super clickedBetaButtonAtIndex:buttonIndex];
     }
 }
 
@@ -123,25 +126,28 @@
         }
     }
     UIAlertView *gameOverAlert = [[UIAlertView alloc] initWithTitle:@"Game Over" message:[NSString stringWithFormat:@"Team %d Wins!!!", winningTeam] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    self.currentAlert = 1;
+    gameOverAlert.tag = GAME_OVER_ALERT;
     [gameOverAlert show];
 }
 
 - (IBAction)removeHandPressed {
     UIActionSheet *removeLastHandConfirmation = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to remove the current hand? This action cannot be undone." delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Hand" otherButtonTitles:nil];
+    removeLastHandConfirmation.tag = REMOVE_LAST_HAND_ACTIONSHEET;
     [removeLastHandConfirmation setActionSheetStyle:UIActionSheetStyleDefault];
     [removeLastHandConfirmation showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-            [self removeLastHand];
-            [self.pitchHandsTableView reloadData];
-            [self showTeamControls];
-            break;
-        case 1:
-            break;
+    if (actionSheet.tag == REMOVE_LAST_HAND_ACTIONSHEET) {
+        switch (buttonIndex) {
+            case 0: // Remove Hand
+                [self removeLastHand];
+                [self.pitchHandsTableView reloadData];
+                [self showTeamControls];
+                break;
+            case 1: // Cancel
+                break;
+        }
     }
 }
 
@@ -398,6 +404,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureScoreCardsBetaButton];
     if (!self.teamPlay) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
     self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
     [self startNewGame];

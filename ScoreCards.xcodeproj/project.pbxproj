@@ -25,7 +25,6 @@
 		944040A815EDC5540039F542 /* team4.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A215EDC5540039F542 /* team4.png */; };
 		944040A915EDC5540039F542 /* team5.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A315EDC5540039F542 /* team5.png */; };
 		944040AA15EDC5540039F542 /* team6.png in Resources */ = {isa = PBXBuildFile; fileRef = 944040A415EDC5540039F542 /* team6.png */; };
-		9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93015F71007008B9F8C /* ScoreCardsViewController.m */; };
 		9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */; };
 		9444A93715F72816008B9F8C /* GameSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93615F72816008B9F8C /* GameSelectTableViewController.m */; };
 		946A10DD15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */; };
@@ -57,6 +56,7 @@
 		941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsNavigationViewController.m; sourceTree = "<group>"; };
 		9437C35215EECD8F00F95535 /* GameSetupOptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionsTableViewController.h; sourceTree = "<group>"; };
 		9437C35315EECD8F00F95535 /* GameSetupOptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetupOptionsTableViewController.m; sourceTree = "<group>"; };
+		9440361B15F7C574001BAFAC /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		9440409415EDAEFF0039F542 /* diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond.png; sourceTree = "<group>"; };
 		9440409815EDB0AC0039F542 /* club.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = club.png; sourceTree = "<group>"; };
 		9440409A15EDB5BB0039F542 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
@@ -67,8 +67,6 @@
 		944040A215EDC5540039F542 /* team4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team4.png; sourceTree = "<group>"; };
 		944040A315EDC5540039F542 /* team5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team5.png; sourceTree = "<group>"; };
 		944040A415EDC5540039F542 /* team6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team6.png; sourceTree = "<group>"; };
-		9444A92F15F71007008B9F8C /* ScoreCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsViewController.h; sourceTree = "<group>"; };
-		9444A93015F71007008B9F8C /* ScoreCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsViewController.m; sourceTree = "<group>"; };
 		9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WithScoreCardsBetaButton.h"; sourceTree = "<group>"; };
 		9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WithScoreCardsBetaButton.m"; sourceTree = "<group>"; };
 		9444A93515F72816008B9F8C /* GameSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSelectTableViewController.h; sourceTree = "<group>"; };
@@ -131,6 +129,7 @@
 				94145B7815EFCF47008970BE /* Default@2x.png */,
 			);
 			name = "Launch Images";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		94145B7E15F00477008970BE /* Splash Screen */ = {
@@ -169,6 +168,8 @@
 		9444A93B15F72E13008B9F8C /* Game Select */ = {
 			isa = PBXGroup;
 			children = (
+				9444A93515F72816008B9F8C /* GameSelectTableViewController.h */,
+				9444A93615F72816008B9F8C /* GameSelectTableViewController.m */,
 			);
 			name = "Game Select";
 			sourceTree = "<group>";
@@ -184,7 +185,6 @@
 		947A0E7915EA734C003AEF56 = {
 			isa = PBXGroup;
 			children = (
-				94145B7A15EFD443008970BE /* Launch Images */,
 				947A0E8E15EA734C003AEF56 /* ScoreCards */,
 				947A0E8715EA734C003AEF56 /* Frameworks */,
 				947A0E8515EA734C003AEF56 /* Products */,
@@ -212,22 +212,18 @@
 		947A0E8E15EA734C003AEF56 /* ScoreCards */ = {
 			isa = PBXGroup;
 			children = (
-				94145B7115EFC77F008970BE /* App Icons */,
 				94145B7E15F00477008970BE /* Splash Screen */,
 				9444A93B15F72E13008B9F8C /* Game Select */,
 				94B1AAB815EE880F0057B93D /* Game Setup */,
 				9444A93C15F72E41008B9F8C /* Games */,
 				947A0E9A15EA734C003AEF56 /* MainStoryboard.storyboard */,
+				9440361B15F7C574001BAFAC /* Globals.h */,
 				941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */,
 				941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */,
 				9494CE7A15F49D06006B4F8E /* ScoreCardsTableViewController.h */,
 				9494CE7B15F49D06006B4F8E /* ScoreCardsTableViewController.m */,
-				9444A92F15F71007008B9F8C /* ScoreCardsViewController.h */,
-				9444A93015F71007008B9F8C /* ScoreCardsViewController.m */,
 				9444A93215F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.h */,
 				9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */,
-				9444A93515F72816008B9F8C /* GameSelectTableViewController.h */,
-				9444A93615F72816008B9F8C /* GameSelectTableViewController.m */,
 				947A0E8F15EA734C003AEF56 /* Supporting Files */,
 			);
 			path = ScoreCards;
@@ -236,6 +232,8 @@
 		947A0E8F15EA734C003AEF56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				94145B7115EFC77F008970BE /* App Icons */,
+				94145B7A15EFD443008970BE /* Launch Images */,
 				9440409E15EDB5C50039F542 /* Card Suit Images */,
 				944040AB15EDC55D0039F542 /* Team Number Images */,
 				947A0E9715EA734C003AEF56 /* ScoreCardsAppDelegate.h */,
@@ -388,7 +386,6 @@
 				94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */,
 				94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */,
 				9494CE7C15F49D06006B4F8E /* ScoreCardsTableViewController.m in Sources */,
-				9444A93115F71007008B9F8C /* ScoreCardsViewController.m in Sources */,
 				9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */,
 				9444A93715F72816008B9F8C /* GameSelectTableViewController.m in Sources */,
 			);

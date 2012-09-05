@@ -9,6 +9,8 @@
 #import "ScoreCardsNavigationViewController.h"
 #import "PitchViewController.h"
 
+#define LEAVE_GAME_ALERT 0
+
 @interface ScoreCardsNavigationViewController ()
 
 @end
@@ -27,7 +29,7 @@
         return YES;
     } else if ([self.topViewController isMemberOfClass:[PitchViewController class]]) {
         UIAlertView *leaveGameAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave the current game? All scores will be lost." message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave Game", nil];
-        
+        leaveGameAlert.tag = LEAVE_GAME_ALERT;
         [leaveGameAlert show];
         
         return NO;
@@ -39,12 +41,16 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        // Cancel button
-    } else if (buttonIndex == 1) {
-        self.alertViewClicked = YES;
-        [self popViewControllerAnimated:YES];
-    }
+    if (alertView.tag == LEAVE_GAME_ALERT) {
+        switch (buttonIndex) {
+            case 0: // Cancel Button
+                break;
+            case 1: // Leave Game Button
+                self.alertViewClicked = YES;
+                [self popViewControllerAnimated:YES];
+                break;
+        }
+    }    
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated

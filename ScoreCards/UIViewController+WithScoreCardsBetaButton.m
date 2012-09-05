@@ -7,8 +7,10 @@
 //
 
 #import "UIViewController+WithScoreCardsBetaButton.h"
+#include "Globals.h"
 
 @implementation UIViewController (WithScoreCardsBetaButton)
+
 
 - (void)configureScoreCardsBetaButton {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"BETA" style:UIBarButtonItemStylePlain target:self action:@selector(betaPressed)];
@@ -17,10 +19,11 @@
 - (void)betaPressed {
     NSLog(@"BETA Pressed!");
     UIAlertView *betaAlert = [[UIAlertView alloc] initWithTitle:@"Choose an action:" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Check for Updates", @"Submit a Bug Report", @"Request a Feature", @"Make a Suggestion", nil];
+    betaAlert.tag = BETA_BUTTON_ALERT;
     [betaAlert show];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)clickedBetaButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
             NSLog(@"Cancel Pressed");
@@ -37,6 +40,12 @@
         case 4:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/newthread/m/7667863/id/1680086"]];
             break;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == BETA_BUTTON_ALERT) {
+        [self clickedBetaButtonAtIndex:buttonIndex];
     }
 }
 

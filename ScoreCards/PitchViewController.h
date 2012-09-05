@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScoreCardsViewController.h"
 
-@interface PitchViewController : ScoreCardsViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
-//@interface PitchViewController : ScoreCardsTableViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *pitchHandsTableView;
 @property (nonatomic) int numberOfPlayers;
