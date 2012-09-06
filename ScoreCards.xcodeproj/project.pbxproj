@@ -431,8 +431,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "0265C722-07A2-4536-80B9-E73E12C44A50";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0265C722-07A2-4536-80B9-E73E12C44A50";
+				PROVISIONING_PROFILE = "9FAF0BB5-3142-4F3E-AE74-626119C3C08B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9FAF0BB5-3142-4F3E-AE74-626119C3C08B";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -448,8 +448,8 @@
 				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
 				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0265C722-07A2-4536-80B9-E73E12C44A50";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0265C722-07A2-4536-80B9-E73E12C44A50";
+				PROVISIONING_PROFILE = "9FAF0BB5-3142-4F3E-AE74-626119C3C08B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9FAF0BB5-3142-4F3E-AE74-626119C3C08B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
@@ -492,8 +492,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan Zulkoski";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -502,8 +502,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "0265C722-07A2-4536-80B9-E73E12C44A50";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0265C722-07A2-4536-80B9-E73E12C44A50";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -525,14 +525,14 @@
 		947A0EA415EA734C003AEF56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ryan Zulkoski";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ryan Zulkoski";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
 				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0265C722-07A2-4536-80B9-E73E12C44A50";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0265C722-07A2-4536-80B9-E73E12C44A50";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

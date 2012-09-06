@@ -29,7 +29,7 @@
             NSLog(@"Cancel Pressed");
             break;
         case 1:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/scorecardsbetadownloads"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://files.rzgamer.com/ScoreCardsBETA"]];
             break;
         case 2:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.rzgamer.com/mobile/forum/newthread/m/7667863/id/1680082"]];
