@@ -165,11 +165,6 @@
     }
 }
 
-- (IBAction)suitSelected:(UISegmentedControl *)sender {
-    [[self.hands objectAtIndex:self.hands.count-1] setObject:[sender imageForSegmentAtIndex:sender.selectedSegmentIndex] forKey:@"BidSuit"];
-    if (self.biddingTeamControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
-}
-
 - (IBAction)biddingTeamSelected:(UISegmentedControl *)sender {
     self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
     [[self.hands objectAtIndex:self.hands.count-1] setObject:[UIImage imageNamed:[NSString stringWithFormat:@"team%d.png", self.biddingTeam]] forKey:@"BidTeam1"];
@@ -181,7 +176,7 @@
     
     if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments - 1){ // If bidding control selected
         self.currentBid = (int)self.pointStepper.value;
-        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:self.currentBid >= 10 ? @"%d       " : @"%d     ", self.currentBid] forKey:@"Bid"];
+        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d   %@", self.currentBid, [self.teamNames objectAtIndex:self.biddingTeam-1]] forKey:@"Bid"];
     } else { // If team control selected
         for (int i = 1; i <= self.numberOfTeams; i++) [self handleScoringForTeam:i];
         [self checkIfGameOver];
@@ -307,8 +302,6 @@
             break;
     }
     cell.bid.text = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"Bid"];
-    cell.bidSuit.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidSuit"];
-    cell.bidTeam1.image = [[self.hands objectAtIndex:[indexPath row]] objectForKey:@"BidTeam1"];
     
     return cell;
 }
