@@ -67,6 +67,7 @@
         
         return vc;
     } else {
+        self.regularPop = YES;
         return [super popViewControllerAnimated:animated];
     }
 }

@@ -8,6 +8,7 @@
 
 #import "GameSetupOptionsTableViewController.h"
 #import "GameSetupOptionChoicesTableViewCell.h"
+#import "ScoreCardsNavigationViewController.h"
 
 @interface GameSetupOptionsTableViewController ()
 
@@ -48,7 +49,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 // #pragma mark - Table view data source
@@ -119,19 +120,10 @@
 }
 */
 
-#pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"RowSelected has been called!");
     [self.delegate setChoice:indexPath.row forOption:self.optionSelected];
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
