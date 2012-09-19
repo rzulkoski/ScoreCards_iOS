@@ -13,6 +13,7 @@
 		94145B7915EFCF47008970BE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94145B7815EFCF47008970BE /* Default@2x.png */; };
 		94145B8115F00E19008970BE /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94145B8015F00E19008970BE /* SplashScreenViewController.m */; };
 		94145B8415F01E12008970BE /* GameSetupTeamNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */; };
+		9416875B160A752D00CA9A04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9416875A160A752D00CA9A04 /* Default-568h@2x.png */; };
 		941D362015EEACA3009F15BB /* ScoreCardsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */; };
 		9437C35415EECD8F00F95535 /* GameSetupOptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9437C35315EECD8F00F95535 /* GameSetupOptionsTableViewController.m */; };
 		9444A93415F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9444A93315F71B66008B9F8C /* UIViewController+WithScoreCardsBetaButton.m */; };
@@ -42,6 +43,7 @@
 		94145B8015F00E19008970BE /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreenViewController.m; sourceTree = "<group>"; };
 		94145B8215F01E12008970BE /* GameSetupTeamNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupTeamNameTableViewCell.h; sourceTree = "<group>"; };
 		94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSetupTeamNameTableViewCell.m; sourceTree = "<group>"; };
+		9416875A160A752D00CA9A04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		941D361E15EEACA3009F15BB /* ScoreCardsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardsNavigationViewController.h; sourceTree = "<group>"; };
 		941D361F15EEACA3009F15BB /* ScoreCardsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardsNavigationViewController.m; sourceTree = "<group>"; };
 		9437C35215EECD8F00F95535 /* GameSetupOptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSetupOptionsTableViewController.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		947A0E7915EA734C003AEF56 = {
 			isa = PBXGroup;
 			children = (
+				9416875A160A752D00CA9A04 /* Default-568h@2x.png */,
 				947A0E8E15EA734C003AEF56 /* ScoreCards */,
 				947A0E8715EA734C003AEF56 /* Frameworks */,
 				947A0E8515EA734C003AEF56 /* Products */,
@@ -290,6 +293,7 @@
 				94145B7515EFC7E3008970BE /* ZLogo_114.png in Resources */,
 				94145B7715EFCF40008970BE /* Default.png in Resources */,
 				94145B7915EFCF47008970BE /* Default@2x.png in Resources */,
+				9416875B160A752D00CA9A04 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

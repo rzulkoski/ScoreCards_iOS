@@ -211,7 +211,7 @@
     int currentValue = (int)self.pointStepper.value;
     int currentHand = self.hands.count-1;
     NSString *teamScore = [NSString stringWithFormat:@"Team%dScore", team];
-    NSStream *teamPointsTaken = [NSString stringWithFormat:@"Team%dPointsTaken", team];
+    NSString *teamPointsTaken = [NSString stringWithFormat:@"Team%dPointsTaken", team];
     NSString *teamScoreChange = [NSString stringWithFormat:@"Team%dScoreChange", team];
     int previousScore = self.hands.count > 1 ? [[[self.hands objectAtIndex:self.hands.count-2] objectForKey:teamScore] intValue] : 0;
     NSString *currentScoreChange = [[self.hands objectAtIndex:currentHand] objectForKey:teamScoreChange];
