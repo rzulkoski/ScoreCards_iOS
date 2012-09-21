@@ -399,7 +399,7 @@
     [super viewDidLoad];
     [self configureScoreCardsBetaButton];
     if (!self.teamPlay) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
-    self.numberOfTeams = self.teamPlay ? self.numberOfPlayers / 2 : self.numberOfPlayers;
+    self.numberOfTeams = self.teamPlay ? 2 : self.numberOfPlayers;
     [self startNewGame];
     for (int i = 0; i < self.numberOfTeams; i++) {
         [self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
