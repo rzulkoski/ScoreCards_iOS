@@ -124,6 +124,21 @@
 			name = "Splash Screen";
 			sourceTree = "<group>";
 		};
+		941F1F85160CB6C900D9D1E3 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				94B1AAB415EE88050057B93D /* GameSetup1RowOptionTableViewCell.h */,
+				94B1AAB515EE88050057B93D /* GameSetup1RowOptionTableViewCell.m */,
+				94A1476315EEA0580061E44F /* GameSetup2RowOptionTableViewCell.h */,
+				94A1476415EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m */,
+				94145B8215F01E12008970BE /* GameSetupTeamNameTableViewCell.h */,
+				94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */,
+				946A10DB15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.h */,
+				946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		9444A93B15F72E13008B9F8C /* Game Select */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,18 +222,11 @@
 		94B1AAB815EE880F0057B93D /* Game Setup */ = {
 			isa = PBXGroup;
 			children = (
+				941F1F85160CB6C900D9D1E3 /* TableViewCells */,
 				94F023A715EE810F001DB3BC /* GameSetupTableViewController.h */,
 				94F023A815EE810F001DB3BC /* GameSetupTableViewController.m */,
 				9437C35215EECD8F00F95535 /* GameSetupOptionsTableViewController.h */,
 				9437C35315EECD8F00F95535 /* GameSetupOptionsTableViewController.m */,
-				94B1AAB415EE88050057B93D /* GameSetup1RowOptionTableViewCell.h */,
-				94B1AAB515EE88050057B93D /* GameSetup1RowOptionTableViewCell.m */,
-				94A1476315EEA0580061E44F /* GameSetup2RowOptionTableViewCell.h */,
-				94A1476415EEA0580061E44F /* GameSetup2RowOptionTableViewCell.m */,
-				94145B8215F01E12008970BE /* GameSetupTeamNameTableViewCell.h */,
-				94145B8315F01E12008970BE /* GameSetupTeamNameTableViewCell.m */,
-				946A10DB15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.h */,
-				946A10DC15EEFA0000538906 /* GameSetupOptionChoicesTableViewCell.m */,
 			);
 			name = "Game Setup";
 			sourceTree = "<group>";
@@ -426,8 +434,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PROVISIONING_PROFILE = "313D8369-0147-48C4-8827-CE82D3C33DF2";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "313D8369-0147-48C4-8827-CE82D3C33DF2";
+				PROVISIONING_PROFILE = "F53F91CC-051A-4CCE-AF8F-D96488408832";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F53F91CC-051A-4CCE-AF8F-D96488408832";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -461,11 +469,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ryan Zulkoski (8WP33299KA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan Zulkoski (8WP33299KA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreCards/ScoreCards-Prefix.pch";
 				INFOPLIST_FILE = "ScoreCards/ScoreCards-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "313D8369-0147-48C4-8827-CE82D3C33DF2";
+				PROVISIONING_PROFILE = "F53F91CC-051A-4CCE-AF8F-D96488408832";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F53F91CC-051A-4CCE-AF8F-D96488408832";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

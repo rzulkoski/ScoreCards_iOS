@@ -405,10 +405,6 @@
         [self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
         [self.biddingTeamControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
     }
-    [self.suitControl setImage:[UIImage imageNamed:@"spade.png"] forSegmentAtIndex:0];
-    [self.suitControl setImage:[UIImage imageNamed:@"diamond.png"] forSegmentAtIndex:1];
-    [self.suitControl setImage:[UIImage imageNamed:@"club.png"] forSegmentAtIndex:2];
-    [self.suitControl setImage:[UIImage imageNamed:@"heart.png"] forSegmentAtIndex:3];
     [self.pitchHandsTableView setDataSource:self];
     [self.pitchHandsTableView setDelegate:self];
 }
@@ -439,7 +435,9 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    //if (self.numberOfTeams >= 4)
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    //else return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end
