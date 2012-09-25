@@ -53,33 +53,31 @@
 
 - (NSArray *)getValidChoicesForOption:(int)option {
     NSMutableArray *validChoices = [[NSMutableArray alloc] init];
-    //BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
+    BOOL teamPlay = [[[self.dataForTable objectAtIndex:3] objectForKey:@"OptionValueIndex"] isEqualToString:@"0"] ? YES : NO;
     // TEMPORARILY DISABLED FOR FIRST BETA TEST
-    // int optionValuesLengthForOption = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] count];
+     int optionValuesLengthForOption = [[[self.dataForTable objectAtIndex:option] objectForKey:@"OptionValues"] count];
     switch (option) {
         case 0: // For Number of Players
-            [validChoices addObjectsFromArray:[[NSArray alloc] initWithObjects:@"0", @"1", @"2", @"4", nil]]; // TEMPORARY FOR FIRST BETA TEST
-            //for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
+            for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
             break;
         case 1: // For Number of Points Per Hand
             switch ([[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Players
                 case 2: // 4 Players
-                case 3: // 5 Players
                 case 4: // 6 Players
-                    //if (teamPlay) {
+                    if (teamPlay) {
                         [validChoices addObject:@"2"]; // 10 Point
                         [validChoices addObject:@"3"]; // 13 Point
                         [validChoices addObject:@"4"]; // 14 Point
-                    //    break;
-                    //}
+                        break;
+                    }
                 case 0: // 2 Players
                 case 1: // 3 Players
                     [validChoices addObject:@"0"]; // 4 Point
                     [validChoices addObject:@"1"]; // 5 Point
                     break;
-                //case 3: // 5 Players
-                //    for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
-                //    break;
+                case 3: // 5 Players
+                    for (int i = 0; i < optionValuesLengthForOption; i++) [validChoices addObject:[NSString stringWithFormat:@"%d", i]]; // Return all choices
+                    break;
             }
             break;
         case 2: // For Number of Points Per Game
@@ -109,8 +107,20 @@
                     //if ([[[NSArray alloc] initWithObjects:@"2", @"3", @"4", nil] containsObject:[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"]]) break;
                 case 0: // 2 Players
                 case 1: // 3 Players
-                case 3: // 5 Players
                     [validChoices addObject:@"1"]; // No
+                    break;
+                case 3: // 5 Players
+                    switch ([[[self.dataForTable objectAtIndex:1] objectForKey:@"OptionValueIndex"] intValue]) { // Number of Points Per Hand
+                        case 0: // 4 Point
+                        case 1: // 5 Point
+                            [validChoices addObject:@"1"]; // No
+                            break;
+                        case 2: // 10 Point
+                        case 3: // 13 Point
+                        case 4: // 14 Point
+                            [validChoices addObject:@"0"]; // Yes (Call Your Partner)
+                            break;
+                    }
                     break;
             }
             
@@ -135,7 +145,8 @@
             optionValueDisplay = [NSString stringWithFormat:@"%@ Points", optionValue];
             break;
         case 3:
-            optionValueDisplay = optionValue;
+            if ([[[self.dataForTable objectAtIndex:0] objectForKey:@"OptionValueIndex"] intValue] == 3 && [optionValue isEqualToString:@"Yes"]) optionValueDisplay = @"Call Your Partner";
+            else optionValueDisplay = optionValue;
             break;
     }
     return optionValueDisplay;
