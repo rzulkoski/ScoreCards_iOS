@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSMutableArray *hands;
 @property (nonatomic) int numberOfTeams;
 @property (nonatomic) int biddingTeam;
+@property (nonatomic) int biddingPartner;
 @property (nonatomic) int currentBid;
  
 @end
@@ -56,6 +57,7 @@
 @synthesize hands = _hands;
 @synthesize numberOfTeams = _numberOfTeams;
 @synthesize biddingTeam = _biddingTeam;
+@synthesize biddingPartner = _biddingPartner;
 @synthesize minimumBid = _minimumBid;
 @synthesize currentBid = _currentBid;
 
@@ -166,9 +168,28 @@
 }
 
 - (IBAction)biddingTeamSelected:(UISegmentedControl *)sender {
-    self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
-    [[self.hands objectAtIndex:self.hands.count-1] setObject:[UIImage imageNamed:[NSString stringWithFormat:@"team%d.png", self.biddingTeam]] forKey:@"BidTeam1"];
-    if (self.suitControl.selectedSegmentIndex >= 0) [self updateCurrentRow];
+    if (self.numberOfPlayers == 5 && self.teamPlay == YES) { // Call Your Partner
+        NSLog(@"Playing CYP!");
+        if (self.biddingTeam == 0) { // Setting the bidder
+            NSLog(@"Setting the Bidder!");
+            self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
+            //[self.biddingTeamControl removeSegmentAtIndex:self.biddingTeamControl.selectedSegmentIndex animated:NO];
+            //[self.biddingTeamControl insertSegmentWithTitle:@"Undo" atIndex:self.biddingTeamControl.numberOfSegments animated:NO];
+            //NSLog(@"Tint = %@", self.biddingTeamControl.tintColor);
+            UIColor *myColor = self.biddingTeamControl.tintColor;
+            [self.biddingTeamControl setEnabled:NO forSegmentAtIndex:self.biddingTeamControl.selectedSegmentIndex+1];
+            self.biddingTeamControl.selectedSegmentIndex = -1;
+            [self.biddingTeamControl setTintColor:myColor];
+            self.biddingTeamControlLabel.text = @"Partner:";
+        } else { // Setting the partner
+            NSLog(@"Setting the Partner!");
+            self.biddingPartner = self.biddingTeamControl.selectedSegmentIndex+1;
+            [self updateCurrentRow];
+        }
+    } else { // Not Call Your Partner
+        self.biddingTeam = self.biddingTeamControl.selectedSegmentIndex+1;
+        [self updateCurrentRow];
+    }
 }
 
 - (void)updateCurrentRow {
@@ -176,7 +197,9 @@
     
     if (self.pointTargetControl.selectedSegmentIndex == self.pointTargetControl.numberOfSegments - 1){ // If bidding control selected
         self.currentBid = (int)self.pointStepper.value;
-        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d   %@", self.currentBid, [self.teamNames objectAtIndex:self.biddingTeam-1]] forKey:@"Bid"];
+        NSString *biddingTeamName = [self.teamNames objectAtIndex:self.biddingTeam-1];
+        if (self.numberOfPlayers == 5 && self.teamPlay == YES) biddingTeamName = [biddingTeamName stringByAppendingFormat:@"-%@", [self.biddingTeamControl titleForSegmentAtIndex:self.biddingPartner-1]];
+        [[self.hands objectAtIndex:self.hands.count-1] setObject:[NSString stringWithFormat:@"%d   %@", self.currentBid, biddingTeamName] forKey:@"Bid"];
     } else { // If team control selected
         for (int i = 1; i <= self.numberOfTeams; i++) [self handleScoringForTeam:i];
         [self checkIfGameOver];
@@ -400,6 +423,9 @@
     [self configureScoreCardsBetaButton];
     if (!self.teamPlay || self.numberOfPlayers == 5) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
     self.numberOfTeams = self.teamPlay && self.numberOfPlayers != 5 ? 2 : self.numberOfPlayers;
+    if (self.teamPlay && self.numberOfPlayers == 5) {
+        [self.biddingTeamControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    }
     [self startNewGame];
     for (int i = 0; i < self.numberOfTeams; i++) {
         [self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
