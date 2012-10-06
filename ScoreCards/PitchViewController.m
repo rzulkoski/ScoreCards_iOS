@@ -33,6 +33,7 @@
 @property (nonatomic) int biddingTeam;
 @property (nonatomic) int biddingPartner;
 @property (nonatomic) int currentBid;
+@property (nonatomic) BOOL callYourPartner;
  
 @end
 
@@ -60,6 +61,7 @@
 @synthesize biddingPartner = _biddingPartner;
 @synthesize minimumBid = _minimumBid;
 @synthesize currentBid = _currentBid;
+@synthesize callYourPartner = _callYourPartner;
 
 - (IBAction)pointTargetSelected:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == sender.numberOfSegments-1) {
@@ -74,7 +76,7 @@
 }
 
 - (void)adjustMaxPointsIfNeeded {
-    if (self.numberOfTeams > 2 && self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) self.pointStepper.maximumValue = self.numberOfPointsPerHand - [self pointsScoredSoFar] + self.pointStepper.value;
+    if (self.numberOfTeams > 2 && !self.callYourPartner && self.pointTargetControl.selectedSegmentIndex != self.pointTargetControl.numberOfSegments-1) self.pointStepper.maximumValue = self.numberOfPointsPerHand - [self pointsScoredSoFar] + self.pointStepper.value;
 }
 
 - (void)updatePointStepperDisplay {
@@ -176,10 +178,10 @@
             //[self.biddingTeamControl removeSegmentAtIndex:self.biddingTeamControl.selectedSegmentIndex animated:NO];
             //[self.biddingTeamControl insertSegmentWithTitle:@"Undo" atIndex:self.biddingTeamControl.numberOfSegments animated:NO];
             //NSLog(@"Tint = %@", self.biddingTeamControl.tintColor);
-            UIColor *myColor = self.biddingTeamControl.tintColor;
-            [self.biddingTeamControl setEnabled:NO forSegmentAtIndex:self.biddingTeamControl.selectedSegmentIndex+1];
+            //UIColor *myColor = self.biddingTeamControl.tintColor;
+            [self.biddingTeamControl setEnabled:NO forSegmentAtIndex:self.biddingTeamControl.selectedSegmentIndex];
             self.biddingTeamControl.selectedSegmentIndex = -1;
-            [self.biddingTeamControl setTintColor:myColor];
+            //[self.biddingTeamControl setTintColor:myColor];
             self.biddingTeamControlLabel.text = @"Partner:";
         } else { // Setting the partner
             NSLog(@"Setting the Partner!");
@@ -262,7 +264,7 @@
     }
     else { // If team control selected
         if (team == selectedTeam) {
-            if (team == self.biddingTeam) {
+            if (team == self.biddingTeam || team == self.biddingPartner) {
                 [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? prevScorePlusCurScore : prevScoreMinusBid forKey:teamScore];
                 [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? curValuePlus : minusCurBid forKey:teamScoreChange];
             } else {
@@ -270,7 +272,7 @@
                 [[self.hands objectAtIndex:currentHand] setObject:curValuePlus forKey:teamScoreChange];
             }
             [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
-        } else if (self.numberOfTeams == 2 && self.numberOfPointsPerHand >=10) {
+        } else if (self.numberOfTeams == 2 && self.numberOfPointsPerHand >=10 && self.numberOfPlayers != 5) {
             if (team == self.biddingTeam) {
                 [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? prevScorePlusInvCurScore : prevScoreMinusBid forKey:teamScore];
                 [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? invCurValuePlus : minusCurBid forKey:teamScoreChange];
@@ -279,6 +281,28 @@
                 [[self.hands objectAtIndex:currentHand] setObject:invCurValuePlus forKey:teamScoreChange];
             }
             [[self.hands objectAtIndex:currentHand] setObject:invCurValue forKey:teamPointsTaken];
+        } else if (self.numberOfPlayers == 5 && self.teamPlay) {
+            if (selectedTeam == self.biddingTeam || selectedTeam == self.biddingPartner) {
+                if (team == self.biddingTeam || team == self.biddingPartner) {
+                    [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? prevScorePlusCurScore : prevScoreMinusBid forKey:teamScore];
+                    [[self.hands objectAtIndex:currentHand] setObject:currentValue >= self.currentBid ? curValuePlus : minusCurBid forKey:teamScoreChange];
+                    [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
+                } else {
+                    [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusInvCurScore forKey:teamScore];
+                    [[self.hands objectAtIndex:currentHand] setObject:invCurValuePlus forKey:teamScoreChange];
+                    [[self.hands objectAtIndex:currentHand] setObject:invCurValue forKey:teamPointsTaken];
+                }
+            } else {
+                if (team == self.biddingTeam || team == self.biddingPartner) {
+                    [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? prevScorePlusInvCurScore : prevScoreMinusBid forKey:teamScore];
+                    [[self.hands objectAtIndex:currentHand] setObject:self.numberOfPointsPerHand - currentValue >= self.currentBid ? invCurValuePlus : minusCurBid forKey:teamScoreChange];
+                    [[self.hands objectAtIndex:currentHand] setObject:invCurValue forKey:teamPointsTaken];
+                } else {
+                    [[self.hands objectAtIndex:currentHand] setObject:prevScorePlusCurScore forKey:teamScore];
+                    [[self.hands objectAtIndex:currentHand] setObject:curValuePlus forKey:teamScoreChange];
+                    [[self.hands objectAtIndex:currentHand] setObject:curValue forKey:teamPointsTaken];
+                }
+            }
         } else {
             if (team == self.biddingTeam && [[[self.hands objectAtIndex:currentHand] objectForKey:teamPointsTaken] intValue] < self.currentBid) [[self.hands objectAtIndex:currentHand] setObject:minusCurBid forKey:teamScoreChange];
             else [[self.hands objectAtIndex:currentHand] setObject:[currentScoreChange isEqualToString:@""] ? @"+0" : currentScoreChange forKey:teamScoreChange];
@@ -330,6 +354,8 @@
 }
 
 - (void)addHand {
+    self.biddingTeam = 0;
+    self.biddingPartner = 0;
     self.currentBid = self.minimumBid;
     [self showBidControls];
     self.pointTargetControl.selectedSegmentIndex = self.pointTargetControl.numberOfSegments - 1;
@@ -347,7 +373,10 @@
         [[self.hands objectAtIndex:self.hands.count-1] setObject:@"" forKey:[NSString stringWithFormat:@"Team%dScoreChange", i]];
     }
     [[self.hands objectAtIndex:self.hands.count-1] setObject:@"No bid" forKey:@"Bid"];
-} // NEEDS A CHECKUP
+    for (int i = 0; i < self.numberOfTeams; i++) {
+        [self.biddingTeamControl setEnabled:YES forSegmentAtIndex:i];
+    }
+}
 
 - (void)removeLastHand {
     if (self.hands.count > 1) [self.hands removeLastObject];
@@ -356,8 +385,19 @@
 - (int)pointsScoredSoFar {
     int pointsScoredSoFar = 0;
     for (int i = 1; i <= self.numberOfTeams; i++) {
-        pointsScoredSoFar += [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dPointsTaken", i]] intValue];
+        if (self.teamPlay && self.numberOfPlayers == 5) { // Call Your Partner
+            if (i != self.biddingTeam && i != self.biddingPartner) {
+                pointsScoredSoFar += [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dPointsTaken", i]] intValue];
+                break;
+            }
+        } else { // NOT Call Your Partner
+            pointsScoredSoFar += [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dPointsTaken", i]] intValue];
+        }
     }
+    if (self.teamPlay && self.numberOfPlayers == 5) { // Call Your Partner
+        pointsScoredSoFar += [[[self.hands objectAtIndex:self.hands.count-1] objectForKey:[NSString stringWithFormat:@"Team%dPointsTaken", self.biddingTeam]] intValue];
+    }
+    NSLog(@"PointsScoredSoFar = %d", pointsScoredSoFar);
     return pointsScoredSoFar;
 }
 
@@ -398,7 +438,6 @@
     self.pointStepper.maximumValue = self.numberOfPointsPerHand;
     if (!self.hands) self.hands = [[NSMutableArray alloc] init];
     else [self.hands removeAllObjects];
-    [self addHand];
     if (self.numberOfTeams > 2) {
         for (int i = 0; i < self.numberOfTeams; i++) {
             if (i > 1) {
@@ -408,31 +447,31 @@
             else [self.pointTargetControl setTitle:[NSString stringWithFormat:@"P%d", i+1] forSegmentAtIndex:i];
         }
     }
+    [self addHand];
 }
 
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
+- (void)setupGame {
+    if (self.teamPlay && self.numberOfPlayers == 5) { // Call Your Partner
+        self.callYourPartner = YES;
+        self.numberOfTeams = self.numberOfPlayers;
+        //[self.biddingTeamControl setSegmentedControlStyle:UISegmentedControlStyleBar]; // DONT KNOW YET
+    } else {
+        self.numberOfTeams = self.teamPlay ? 2 : self.numberOfPlayers;
+    }
+    if (!self.teamPlay || self.callYourPartner) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
+    for (int i = 0; i < self.numberOfTeams; i++) {
+        //[self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
+        //[self.biddingTeamControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configureScoreCardsBetaButton];
-    if (!self.teamPlay || self.numberOfPlayers == 5) self.teamNames = [[NSArray alloc] initWithObjects:@"P1", @"P2", @"P3", @"P4", @"P5", @"P6", nil]; // TEMPORARY FOR FIRST BETA TEST
-    self.numberOfTeams = self.teamPlay && self.numberOfPlayers != 5 ? 2 : self.numberOfPlayers;
-    if (self.teamPlay && self.numberOfPlayers == 5) {
-        [self.biddingTeamControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-    }
-    [self startNewGame];
-    for (int i = 0; i < self.numberOfTeams; i++) {
-        [self.pointTargetControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
-        [self.biddingTeamControl setTitle:[self.teamNames objectAtIndex:i] forSegmentAtIndex:i];
-    }
     [self.pitchHandsTableView setDataSource:self];
     [self.pitchHandsTableView setDelegate:self];
+    [self configureScoreCardsBetaButton];
+    [self setupGame];
+    [self startNewGame];
 }
 
 - (void)viewDidUnload {
@@ -461,9 +500,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    //if (self.numberOfTeams >= 4)
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-    //else return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end
