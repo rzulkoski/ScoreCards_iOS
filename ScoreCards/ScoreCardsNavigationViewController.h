@@ -10,7 +10,7 @@
 
 @interface ScoreCardsNavigationViewController : UINavigationController <UIAlertViewDelegate, UINavigationBarDelegate>
 
-@property (nonatomic) BOOL alertViewClicked;
+@property (nonatomic) BOOL leaveGameSelected;
 @property (nonatomic) BOOL regularPop;
 
 @end

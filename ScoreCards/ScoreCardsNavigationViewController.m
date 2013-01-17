@@ -17,23 +17,24 @@
 
 @implementation ScoreCardsNavigationViewController
 
-@synthesize alertViewClicked = _alertViewClicked;
+@synthesize leaveGameSelected = _leaveGameSelected;
 @synthesize regularPop = _regularPop;
 
+// Overrides the "Back" button displayed in the Navigation Bar to ask for confirmation when in the middle of a game.
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item {
-    if (self.regularPop) {
+    if (self.regularPop) {                  // Regular Pop? If so, Pop.
         self.regularPop = NO;
         return YES;
-    } else if (self.alertViewClicked) {
-        self.alertViewClicked = NO;
+    } else if (self.leaveGameSelected) {    // Leave game chosen? If so, Pop.
+        self.leaveGameSelected = NO;
         return YES;
-    } else if ([self.topViewController isMemberOfClass:[PitchViewController class]]) {
+    } else if ([self.topViewController isMemberOfClass:[PitchViewController class]]) {  // Current VC is PitchVC? Ask for confirmation to leave current game by displaying AlertView.
         UIAlertView *leaveGameAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave the current game? All scores will be lost." message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave Game", nil];
         leaveGameAlert.tag = LEAVE_GAME_ALERT;
         [leaveGameAlert show];
         
         return NO;
-    } else {
+    } else {                                // Default case, just Pop.
         self.regularPop = YES;
         [self popViewControllerAnimated:YES];
         return NO;
@@ -46,7 +47,7 @@
             case 0: // Cancel Button
                 break;
             case 1: // Leave Game Button
-                self.alertViewClicked = YES;
+                self.leaveGameSelected = YES;
                 [self popViewControllerAnimated:YES];
                 break;
         }
@@ -55,7 +56,7 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
-    if([[self.viewControllers lastObject] class] == [PitchViewController class]) {
+    if([[self.viewControllers lastObject] class] == [PitchViewController class]) {  // Is top VC PitchVC? If so, use the Curl up animation.
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration: 1.00];
@@ -66,7 +67,7 @@
         [UIView commitAnimations];
         
         return vc;
-    } else {
+    } else {    // Default case, just use the default popping animation.
         self.regularPop = YES;
         return [super popViewControllerAnimated:animated];
     }

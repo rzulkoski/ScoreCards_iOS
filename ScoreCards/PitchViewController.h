@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 RZGamer. All rights reserved.
 //
 
-//  Just a test
-
 #import <UIKit/UIKit.h>
 
 @interface PitchViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
